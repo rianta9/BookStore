@@ -95,9 +95,16 @@ public class User {
 	public Date getDateCreated() {
 		return dateCreated;
 	}
+	
+	public java.util.Date getDateCreatedUtil() {
+		return new java.util.Date(dateCreated.getTime());
+	}
+	
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
+	
+	
 	public String getMaPhanQuyen() {
 		return maPhanQuyen;
 	}
