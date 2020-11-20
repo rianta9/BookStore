@@ -55,6 +55,7 @@ public class ThanhToanController extends HttpServlet {
 			response.sendRedirect("LoginController");
 			return;
 		}
+		
 		else {
 			String orderID = RandomUUID.getRandomID();
 			Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
