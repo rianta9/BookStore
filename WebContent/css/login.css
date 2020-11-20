@@ -1,0 +1,145 @@
+body{
+	font-family: Poppins-Regular,sans-serif;
+	background-color: #f2f2f2;
+	line-height: 1.2;
+}
+
+a, a:active, a:visited{
+	text-decoration: none;
+	color: #000;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+.loginform {
+	color: #292929;
+	font-size: 16px;
+	display: flex;
+	position: relative; align-items : center;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 50px;
+	padding: 0;
+}
+
+.signupform {
+	color: #292929;
+	font-size: 16px;
+	display: flex;
+	position: relative; align-items : center;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 50px;
+	padding: 0;
+}
+
+
+/* The Modal (background) */
+.modal {
+	position: relative;
+	top: 30px; 
+	width : 390px; /* Full width */
+	max-width: 90%;
+	background-color: white; /* Fallback color */
+	color: #292929;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+}
+
+
+.modal-signup{
+	position: relative;
+	top: 5px; 
+	width : 460px; /* Full width */
+	max-width: 90%;
+	background-color: white; /* Fallback color */
+	color: #292929;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+}
+
+/* Modal Content/Box */
+.modal-content {
+	padding: 40px;
+}
+
+.modal-signup .modal-content{
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=email], input[type=tel] {
+	width: 100%;
+	border-radius: 5px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.button {
+	background-color: #292929;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	width: 100%;
+	text-transform: uppercase;
+	font-family: Poppins-Bold;
+	font-size: 15px;
+	border: 1px solid #000;
+}
+
+
+.br-5{
+	border-radius: 5px;
+}
+
+.br-10{
+	border-radius: 10px;
+}
+
+.br-20{
+	border-radius: 20px;
+}
+
+.button:hover {
+	border-color: #ffcc;
+}
+
+.welcome{
+	font-family: Poppins-Bold;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	color: #292929;
+	line-height: 1.2;
+}
+
+.modal-signup .welcome{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+label{
+	margin-top: 50px;
+	font-family: Poppins-Bold;
+	font-size: 20px;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.error{
+	font-size: 10px;
+	color: red;
+	margin-bottom: 20px;
+}
+
