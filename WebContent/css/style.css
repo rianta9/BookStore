@@ -176,13 +176,13 @@ a.light{
 .search-form1{
 	display: flex;
 	padding: 12px 20px;
-	margin-left: 30px;
 }
 
 
 
 .search-form1  .search-input{
-	width: 76%;
+	min-width: 280px;
+	max-width: 76%;
 	height: 30px;
 	border-radius: 5px;
 	padding: 0 10px;
@@ -191,6 +191,9 @@ a.light{
 .search-form1  .search-button{
 	width: 20%;
 	height: 30px;
+	text-align: center;
 	margin-left: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 	border-radius: 5px;
 }

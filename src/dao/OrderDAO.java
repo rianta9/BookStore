@@ -10,6 +10,14 @@ import bean.Order;
 import jdbc.ThietLap;
 
 public class OrderDAO {	
+	
+	private ThietLap thietLap;
+	
+	public OrderDAO() {
+		thietLap = new ThietLap();
+		thietLap.connect();
+	}
+	
 	/**
 	 * Tìm kiếm một order theo mã
 	 * @param orderID
@@ -20,7 +28,7 @@ public class OrderDAO {
 		String sql = "select * from Order where OrderID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, orderID);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
@@ -42,7 +50,7 @@ public class OrderDAO {
 		String sql = "select * from [Order] where userID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, userID);
 			ResultSet rs = c.executeQuery();
 			while(rs.next()) {
@@ -63,7 +71,7 @@ public class OrderDAO {
 		boolean result = false;
 		try {
 			String sql = "insert into Order(UserID, ShipInfo, DiscountCode) values (?, ?, ?)";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, order.getUserID()); 
 			c.setNString(2, order.getShipInfo()); 
 			c.setString(3, order.getDiscountCode()); 
@@ -85,7 +93,7 @@ public class OrderDAO {
 		String sql = "select * from OrderDetail where OrderID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, orderID);
 			ResultSet rs = c.executeQuery();
 			return rs.next();
@@ -108,7 +116,7 @@ public class OrderDAO {
 		try {
 			// Sai cho nay, dung ? ko dung
 			String sql = "delete from Order where OrderID = ?";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, orderID);
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
@@ -122,7 +130,7 @@ public class OrderDAO {
 		boolean result = false;
 		try {
 			String sql = "UPDATE Order SET DateCreated = ? , UserID = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setDate(1, order.getDateCreated()); // hoten
 			c.setLong(2, order.getUserID()); // ngaysinh
 			c.setNString(3, order.getShipInfo()); //hsl

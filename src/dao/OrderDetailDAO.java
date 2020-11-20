@@ -12,6 +12,13 @@ import bo.Tool;
 import jdbc.ThietLap;
 
 public class OrderDetailDAO {
+	
+	private ThietLap thietLap;
+	
+	public OrderDetailDAO() {
+		thietLap = new ThietLap();
+		thietLap.connect();
+	}
 	/**
 	 * Tìm kiếm một order theo mã
 	 * @param orderID
@@ -22,7 +29,7 @@ public class OrderDetailDAO {
 		String sql = "select * from OrderDetail where OrderID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, orderID);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
@@ -45,7 +52,7 @@ public class OrderDetailDAO {
 //		String sql = "select * from Order where NickName = ?";
 //		PreparedStatement c;
 //		try {
-//			c = ThietLap.cn.prepareStatement(sql);
+//			c = thietLap.cn.prepareStatement(sql);
 //			c.setInt(1, userID);
 //			ResultSet rs = c.executeQuery();
 //			while(rs.next()) {
@@ -68,7 +75,7 @@ public class OrderDetailDAO {
 //		boolean result = false;
 //		try {
 //			String sql = "insert into Order(DateCreated, Nickname, DeliveryDate, ShipInfo, DiscountCode) values (?, ?, ?, ?, ?)";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+//			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 //			c.setDate(1, order.getDateCreated());//manv
 //			c.setString(2, order.getNickname()); // hoten
 //			c.setDate(3, order.getDeliveryDate()); // ngaysinh
@@ -92,7 +99,7 @@ public class OrderDetailDAO {
 //		String sql = "select * from OrderDetail where OrderID = ?";
 //		PreparedStatement c;
 //		try {
-//			c = ThietLap.cn.prepareStatement(sql);
+//			c = thietLap.cn.prepareStatement(sql);
 //			c.setInt(1, orderID);
 //			ResultSet rs = c.executeQuery();
 //			return rs.next();
@@ -115,7 +122,7 @@ public class OrderDetailDAO {
 //		try {
 //			// Sai cho nay, dung ? ko dung
 //			String sql = "delete from Order where OrderID = ?";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+//			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 //			c.setInt(1, orderID);
 //			if(c.executeUpdate() == 1) result = true;
 //		} catch (Exception e) {
@@ -129,7 +136,7 @@ public class OrderDetailDAO {
 //		boolean result = false;
 //		try {
 //			String sql = "UPDATE Order SET DateCreated = ? , Nickname = ? , DeliveryDate = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+//			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 //			c.setDate(1, order.getDateCreated()); // hoten
 //			c.setString(2, order.getNickname()); // ngaysinh
 //			c.setDate(3, order.getDeliveryDate()); //true = nam , false = nu

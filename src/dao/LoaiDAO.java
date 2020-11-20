@@ -44,7 +44,7 @@ public class LoaiDAO {
 	public ArrayList<LoaiSach> docDatabase() {
 		list = new ArrayList<LoaiSach>();
 		try {
-			ResultSet data = ThietLap.getTable("LoaiSach");
+			ResultSet data = database.getTable("LoaiSach");
 			if(data == null) System.out.println("Data null");
 			while(data.next()) {
 				String maLoai = data.getString("MaLoaiSach").trim();
