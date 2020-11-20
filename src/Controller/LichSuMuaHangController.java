@@ -40,13 +40,16 @@ public class LichSuMuaHangController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
- 		if(user == null) response.sendRedirect("LoginController");
+ 		if(user == null) {
+ 			response.sendRedirect("LoginController");
+ 			return;
+ 		}
  		else {
  			OrderBO bo = new OrderBO();
  			ArrayList<Order> list = bo.timKiemTheoUserID(user.getUserID());
  			request.setAttribute("list-order", list);
- 			request.getRequestDispatcher("lichsumuahang.jsp").forward(request, response);
  		}
+		request.getRequestDispatcher("lichsumuahang.jsp").forward(request, response);
 	}
 
 	/**

@@ -2,7 +2,7 @@ package bean;
 
 import java.sql.Date;
 
-import bo.Tool;
+import tools.Tool;
 
 public class User {
 	private long userID;

@@ -45,19 +45,7 @@ public class SachController extends HttpServlet {
 			response.setContentType("text/html");
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			
-	        String user;
-	        String loginDisplay = "block";
-	        String logoutDisplay = "none";
-	        
-	        HttpSession session = request.getSession();
-	        user = (String)session.getAttribute("username");
-	        if(user == null || user.isEmpty()) user = "Khách";
-	        else {
-	        	loginDisplay = "none";
-				logoutDisplay = "block";
-	        }
-	       
+				       
 			request.setAttribute("listloaisach", lbo.getLoaiSach());
 			
 			ArrayList<Sach> ds = sbo.getSach();
@@ -71,9 +59,6 @@ public class SachController extends HttpServlet {
 				else ds = sbo.locTheoLoaiSach(tag);
 			}
 			
-			request.setAttribute("login-display", loginDisplay);
-			request.setAttribute("logout-display", logoutDisplay);
-			request.setAttribute("user", user);
 			request.setAttribute("listsach", ds);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("sach.jsp");

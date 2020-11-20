@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import bean.Order;
 import bean.User;
-import bo.Tool;
 import jdbc.ThietLap;
+import tools.Tool;
 
 public class UserDAO {
 	private ThietLap thietLap;

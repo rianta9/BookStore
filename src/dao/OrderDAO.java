@@ -23,13 +23,13 @@ public class OrderDAO {
 	 * @param orderID
 	 * @return
 	 */
-	public Order timKiemTheoOrderID(long orderID){
+	public Order timKiemTheoOrderID(String orderID){
 		Order result = null;
-		String sql = "select * from Order where OrderID = ?";
+		String sql = "select * from [Order] where OrderID = ?";
 		PreparedStatement c;
 		try {
 			c = thietLap.cn.prepareStatement(sql);
-			c.setLong(1, orderID);
+			c.setString(1, orderID);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
 				Date dateCreated = rs.getDate("DateCreated");
@@ -54,10 +54,10 @@ public class OrderDAO {
 			c.setLong(1, userID);
 			ResultSet rs = c.executeQuery();
 			while(rs.next()) {
-				long orderID = rs.getLong("OrderID");
+				String orderID = rs.getString("OrderID");
 				Date dateCreated = rs.getDate("DateCreated");
 				String shipInfo = rs.getNString("ShipInfo").trim();
-				String discountCode = rs.getString("DiscountCode").trim();
+				String discountCode = rs.getString("DiscountCode");
 				result.add(new Order(orderID, dateCreated, userID, shipInfo, discountCode));
 			}
 		} catch (Exception e) {
@@ -70,11 +70,12 @@ public class OrderDAO {
 	public boolean them(Order order) {
 		boolean result = false;
 		try {
-			String sql = "insert into Order(UserID, ShipInfo, DiscountCode) values (?, ?, ?)";
+			String sql = "insert into [Order](UserID, ShipInfo, DiscountCode, OrderID) values (?, ?, ?, ?)";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, order.getUserID()); 
 			c.setNString(2, order.getShipInfo()); 
 			c.setString(3, order.getDiscountCode()); 
+			c.setString(4, order.getOrderID());
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
 			System.out.println("Loi khi them");
@@ -88,13 +89,13 @@ public class OrderDAO {
 	 * @param orderID
 	 * @return
 	 */
-	private boolean daLienKet(long orderID) {
+	private boolean daLienKet(String orderID) {
 		// Tìm kiếm liên kết với table OrderDetail
-		String sql = "select * from OrderDetail where OrderID = ?";
+		String sql = "select * from [OrderDetails] where OrderID = ?";
 		PreparedStatement c;
 		try {
 			c = thietLap.cn.prepareStatement(sql);
-			c.setLong(1, orderID);
+			c.setString(1, orderID);
 			ResultSet rs = c.executeQuery();
 			return rs.next();
 		} catch (Exception e) {
@@ -110,14 +111,14 @@ public class OrderDAO {
 	 * @param orderID
 	 * @return
 	 */
-	public boolean xoa(long orderID) {
+	public boolean xoa(String orderID) {
 		if(daLienKet(orderID)) return false; // kiểm tra mới liên kết
 		boolean result = false;
 		try {
 			// Sai cho nay, dung ? ko dung
-			String sql = "delete from Order where OrderID = ?";
+			String sql = "delete from [Order] where OrderID = ?";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
-			c.setLong(1, orderID);
+			c.setString(1, orderID);
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
 			System.out.println("Loi khi xoa");
@@ -129,7 +130,7 @@ public class OrderDAO {
 	public boolean sua(Order order) {
 		boolean result = false;
 		try {
-			String sql = "UPDATE Order SET DateCreated = ? , UserID = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
+			String sql = "UPDATE [Order] SET DateCreated = ? , UserID = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setDate(1, order.getDateCreated()); // hoten
 			c.setLong(2, order.getUserID()); // ngaysinh

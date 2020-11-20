@@ -13,7 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import bean.GioHang;
 import bean.MonHang;
+import bean.Order;
+import bean.OrderDetail;
+import bean.User;
+import bo.OrderBO;
+import bo.OrderDetailBO;
 import bo.SachBO;
+import util.RandomUUID;
 
 /**
  * Servlet implementation class ThanhToanController
@@ -41,16 +47,33 @@ public class ThanhToanController extends HttpServlet {
 		GioHang gioHang = (GioHang)session.getAttribute("Gio"); 
 		if(gioHang == null){
 			gioHang = new GioHang();
+			session.setAttribute("Gio", gioHang);
 		}
 		
-		
-		ArrayList<MonHang> list = gioHang.getList();
-		for (MonHang monHang : list) {
+		User user = (User)session.getAttribute("user");
+		if(user == null) {
+			response.sendRedirect("LoginController");
+			return;
+		}
+		else {
+			String orderID = RandomUUID.getRandomID();
+			Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
 			
+			OrderBO orderBo = new OrderBO();
+			orderBo.them(order);
+			
+			
+			OrderDetailBO orderDetailBo = new OrderDetailBO();
+			ArrayList<MonHang> list = gioHang.getList();
+			for (MonHang monHang : list) {
+				orderDetailBo.them(new OrderDetail(RandomUUID.getRandomID(), orderID, null, monHang));
+			}
+			session.removeAttribute("Gio");
+			response.sendRedirect("LichSuMuaHangController");
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("giohang.jsp");
-		rd.forward(request, response);
+		
+		
 	}
 
 	/**

@@ -91,7 +91,7 @@
 										<%=order.getOrderID()%></p>
 									<p>
 										Ngày Tạo:
-										<%=order.getDateCreated()%></p>
+										<%=order.getDateCreatedUtil()%></p>
 									
 									
 									<p><a href="chitietorder.jsp?id=<%=order.getOrderID()%>"

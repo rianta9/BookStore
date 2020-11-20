@@ -36,7 +36,7 @@
 
 				<ul class="nav navbar-nav">
 					<li><a href="GioHangController">Giỏ Hàng</a></li>
-					<li><a href="ThanhToanController">Thanh Toán</a></li>
+					<li><a href="#">Thanh Toán</a></li>
 					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
 					<li>
 					<form action="SachController">
@@ -74,10 +74,11 @@
 		</nav>
 	</section>
 
+	<!-- List giỏ hàng -->
 	<section id="view">
 		<%
-			GioHang gioHang = (GioHang) request.getAttribute("GioHang");
-		if (gioHang != null) {
+			GioHang gioHang = (GioHang) session.getAttribute("Gio");
+		if (gioHang != null && !gioHang.getList().isEmpty()) {
 			ArrayList<MonHang> list = gioHang.getList(); // lấy danh sách trong giỏ hàng
 
 			SachBO sbo = (SachBO) request.getAttribute("sbo");
@@ -132,20 +133,20 @@
 							Tổng Tiền: <span style="float: right"><%=gioHang.tongTien()%>
 								đ</span>
 						</h4>
-						<input type="submit" name="thanhtoan" value="Thanh Toán"
+						<form action="ThanhToanController" method="post">
+							<input type="submit" name="thanhtoan" value="Thanh Toán"
 							class="btn btn-success"
 							style="display: block; margin: 0 auto; padding: 10px 100px; border-radius: 25px">
+						</form>
 					</div>
 				</div>
 				<%
 					} else {
 				%>
 				<p align="center">Bạn không có sản phẩm nào trong giỏ!</p>
-				<%
-					}
-				%>
+				<p align="center">Hãy tiếp tục <a class = "button dark" href="SachController">Mua Hàng</a></p>
+				<%} %>
 			</div>
-		</div>
 		</div>
 	</section>
 </body>

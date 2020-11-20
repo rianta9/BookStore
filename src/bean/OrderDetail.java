@@ -4,28 +4,28 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class OrderDetail {
-	long orderDetailID;
-	long orderID;
+	String orderDetailID;
+	String orderID;
 	Date ngayNhan;
 	MonHang monHang;
 	
-	public OrderDetail(long orderDetailID, long orderID, Date ngayNhan, MonHang monHang) {
+	public OrderDetail(String orderDetailID, String orderID, Date ngayNhan, MonHang monHang) {
 		super();
 		this.orderDetailID = orderDetailID;
 		this.orderID = orderID;
 		this.ngayNhan = ngayNhan;
 		this.monHang = monHang;
 	}
-	public long getOrderDetailID() {
+	public String getOrderDetailID() {
 		return orderDetailID;
 	}
-	public void setOrderDetailID(long orderDetailID) {
+	public void setOrderDetailID(String orderDetailID) {
 		this.orderDetailID = orderDetailID;
 	}
-	public long getOrderID() {
+	public String getOrderID() {
 		return orderID;
 	}
-	public void setOrderID(long orderID) {
+	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
 	public MonHang getMonHang() {
