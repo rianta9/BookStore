@@ -30,7 +30,6 @@ public class GioHangController extends HttpServlet{
 		SachBO sbo = new SachBO();
 		sbo.getSach();
 		session.setAttribute("Gio", gioHang);
-		req.setAttribute("GioHang", gioHang);
 		req.setAttribute("sbo", sbo);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("giohang.jsp");

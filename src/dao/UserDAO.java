@@ -7,10 +7,16 @@ import java.util.ArrayList;
 
 import bean.Order;
 import bean.User;
-import bo.Tool;
 import jdbc.ThietLap;
+import tools.Tool;
 
 public class UserDAO {
+	private ThietLap thietLap;
+	
+	public UserDAO() {
+		thietLap = new ThietLap();
+		thietLap.connect();
+	}
 	
 	/**
 	 * Tìm kiếm 1 user bằng nickname
@@ -22,7 +28,7 @@ public class UserDAO {
 		String sql = "select * from User where userID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, id);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
@@ -58,7 +64,7 @@ public class UserDAO {
 		else sql = "Select * from [User] where Phone = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, indentity);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
@@ -86,7 +92,7 @@ public class UserDAO {
 		else sql = "Select * from [User] where Phone = ? and Password = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, indentity);
 			c.setString(2, password);
 			ResultSet rs = c.executeQuery();
@@ -112,7 +118,7 @@ public class UserDAO {
 		boolean result = false;
 		try {
 			String sql = "insert into [User](Password, FullName, Phone, Email) values (?, ?, ?, ?)";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, user.getPassword());
 			c.setNString(2, user.getFullName());
 			c.setString(3, user.getPhone());
@@ -136,7 +142,7 @@ public class UserDAO {
 		String sql = "select * from Order where userID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
+			c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, userID);
 			ResultSet rs = c.executeQuery();
 			//TODO: Kiểm tra những table còn lại có liên quan đến table User
@@ -149,6 +155,7 @@ public class UserDAO {
 		// Tìm kiếm liên kết với table ...
 	}
 	
+	
 	/**
 	 * Xoá một dòng dữ liệu trong table Order
 	 * @param orderID
@@ -160,7 +167,7 @@ public class UserDAO {
 		try {
 			// Sai cho nay, dung ? ko dung
 			String sql = "delete from [User] where userID = ?";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setLong(1, userID);
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
@@ -179,7 +186,7 @@ public class UserDAO {
 		boolean result = false;
 		try {
 			String sql = "UPDATE [User] SET Password = ?, FullName = ?, Birthday = ?, MaPhanQuyen = ?, Phone = ?, Email = ?, Address = ?, Status = ? WHERE UserID = ?";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, user.getPassword());
 			c.setNString(2, user.getFullName());
 			c.setDate(3, user.getBirthdate());
@@ -207,13 +214,57 @@ public class UserDAO {
 		boolean result = false;
 		try {
 			String sql = "UPDATE [User] SET password = ? WHERE userID = ?";
-			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, password);
 			c.setLong(2, userID);
 			
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
 			System.out.println("Loi khi sua!");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Kiểm tra email đã tồn tại trong csdl hay chưa
+	 * @param email
+	 * @return
+	 */
+	public boolean isValidEmail(String email) {
+		if(!Tool.isEmail(email)) return false;
+		boolean result = true;
+		try {
+			String sql = "select * from [User] where email = ?";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, email);
+			
+			if(c.executeQuery().next()) result = false; // tồn tại email
+		} catch (Exception e) {
+			System.out.println("Loi khi sua!");
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * Kiểm tra phone đã tồn tại trong csdl hay chưa
+	 * @param phone
+	 * @return
+	 */
+	public boolean isAvailablePhone(String phone) {
+		boolean result = true;
+		try {
+			String sql = "select * from [User] where phone = ?";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, phone);
+			
+			if(c.executeQuery().next()) result = false; // tồn tại email
+		} catch (Exception e) {
+			System.out.println("Loi khi sua!");
+			result = false;
 			e.printStackTrace();
 		}
 		return result;

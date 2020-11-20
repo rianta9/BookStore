@@ -14,34 +14,35 @@
 		<div class="modal-signup">
 			<div class="modal-content">
 				<p class="welcome">Sign Up</p>
-				<form action="SignUpController" method="post">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" value="${after.username}"
-					placeholder="Enter username" required> 
-					<span class="error" name="error-username">${errors.illegal_username}</span>
-					<br>
-
+				<form action="AddUserController" method="post">
+					
 					<label for="fullname">Full Name</label>
 					<input type="text" id="fullname" name="fullname" value="${after.fullname}"
-					placeholder="Enter full name" required> 
+					placeholder="Enter full name" minlength="4" required> 
 					<span class="error" name="error-fullname">${errors.illegal_fullname}</span>
 					<br>
 
 					<label for="phone">Phone</label>
-					<input type="tel" id="phone" name="phone" value="${after.phone}"
-					placeholder="Enter phone" required> 
+					<input type="text" id="phone" name="phone" value="${after.phone}"
+					placeholder="Enter phone" maxlength="11" minlenght="7" required> 
 					<span class="error" name="error-phone">${errors.illegal_phone}</span>
+					<br>
+					
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" value="${after.email}"
+					placeholder="Enter email" required> 
+					<span class="error" name="error-email">${errors.illegal_email}</span>
 					<br>
 
 					<label for="password">Password</label>
 					<input type="password" id="password" name="password" value="${after.password}"
-					placeholder="Enter password" required> 
+					placeholder="Enter password" minlength="6" required> 
 					<span class="error" name="error-password">${errors.illegal_password}</span>
 					<br>
 
 					<label for="confirm-password">Confirm Password</label>
-					<input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" value="${after.password}" required> 
-					<span class="error" name="error-confirm-password">${errors.confirm_password}</span>
+					<input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" minlength="6" required> 
+					<span class="error" name="error-confirm-password">${errors.illegal_confirm_password}</span>
 					<br>
 					
 					<input type="checkbox" name="checkbox">
@@ -51,8 +52,9 @@
 					<br>
 					<input type="submit" value="Sign Up" name="signupbtn" class="button br-20"> 
 					<br> 
+					<span class="error" name="error-confirm-password">${errors.signup_fail}</span>
 				</form>
-				<p class="text-center"> <span class="txt1">Have an account?</span> <span class="txt2"><a href="LoginController">Log In</a></span></p>
+				<p class="text-center"> <span class="txt1">Already Have an account?</span> <span class="txt2"><a href="LoginController">Log In</a></span></p>
 			</div>
 		</div>
 	</div>

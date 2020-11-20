@@ -10,10 +10,13 @@ import bean.Sach;
 import jdbc.ThietLap;
 
 public class SachDAO {
-	ArrayList<Sach> list;
+	private ArrayList<Sach> list;
+	private ThietLap thietLap;
 	
 	public SachDAO() {
 		list = new ArrayList<Sach>();
+		thietLap = new ThietLap();
+		thietLap.connect();
 	}
 
 	public ArrayList<Sach> getSach() {
@@ -39,7 +42,7 @@ public class SachDAO {
 	public ArrayList<Sach> docDatabase() {
 		list = new ArrayList<Sach>();
 		try {
-			ResultSet data = ThietLap.getTable("Sach");
+			ResultSet data = thietLap.getTable("Sach");
 			if(data == null) System.out.println("Data null");
 			while(data.next()) {
 				String masach = String.valueOf(data.getInt("MaSach"));

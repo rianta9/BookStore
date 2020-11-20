@@ -44,4 +44,12 @@ public class UserBO {
 	public boolean changePassword(long userID, String password) {
 		return dao.changePassword(userID, password);
 	}
+	
+	public boolean isValidEmail(String email) {
+		return dao.isValidEmail(email);
+	}
+	
+	public boolean isAvailablePhone(String phone) {
+		return dao.isAvailablePhone(phone);
+	}
 }

@@ -1,16 +1,18 @@
 package bean;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 //Giỏ hàng sau khi được khách hàng xác nhận mua sẽ được ghi thông tin thành một order
 public class Order {
-	private long orderID;
+	private String orderID;
 	private Date dateCreated;
 	private long userID;
 	private String shipInfo;
 	private String discountCode;
 	
-	public Order(long orderID, Date dateCreated, long userID, String shipInfo,
+	public Order(String orderID, Date dateCreated, long userID, String shipInfo,
 			String discountCode) {
 		super();
 		this.orderID = orderID;
@@ -20,11 +22,11 @@ public class Order {
 		this.discountCode = discountCode;
 	}
 
-	public long getOrderID() {
+	public String getOrderID() {
 		return orderID;
 	}
 
-	public void setOrderID(long orderID) {
+	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
 
@@ -60,6 +62,8 @@ public class Order {
 		this.discountCode = discountCode;
 	}
 	
-	
+	public java.util.Date getDateCreatedUtil() {
+		return new java.util.Date(this.getDateCreated().getTime());
+	}
 	
 }

@@ -29,7 +29,13 @@ public class LoginController extends HttpServlet{
 
 
 		HttpSession session = req.getSession();
-		if(session.getAttribute("user") == null) {
+		// Nếu user đã đăng nhập thì không cho phép đăng ký nữa
+		if(session.getAttribute("user") != null) {
+			resp.sendRedirect("SachController");
+			return;
+		}
+		
+		else {
 			// Create a Bundle of errors in the form of Map 
 
 			Map<String, String> errors = new HashMap<String, String>(); 
@@ -44,6 +50,10 @@ public class LoginController extends HttpServlet{
 					User u = bo.getLogin(indentity, password);
 					session.setAttribute("user", u);
 
+					// xoá after, errors
+					session.removeAttribute("after");
+					session.removeAttribute("errors");
+					
 					resp.sendRedirect("SachController");
 					return;
 				}

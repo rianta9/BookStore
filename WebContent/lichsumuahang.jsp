@@ -31,7 +31,7 @@
 
 				<ul class="nav navbar-nav">
 					<li><a href="GioHangController">Giỏ Hàng</a></li>
-					<li><a href="ThanhToanController">Thanh Toán</a></li>
+					<li><a href="#">Thanh Toán</a></li>
 					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
 					<li>
 					<form action="SachController">
@@ -91,7 +91,7 @@
 										<%=order.getOrderID()%></p>
 									<p>
 										Ngày Tạo:
-										<%=order.getDateCreated()%></p>
+										<%=order.getDateCreatedUtil()%></p>
 									
 									
 									<p><a href="chitietorder.jsp?id=<%=order.getOrderID()%>"

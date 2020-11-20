@@ -12,7 +12,7 @@ public class OrderBO {
 		dao = new OrderDAO();
 	}
 	
-	public Order timKiemTheoOrderID(int orderID){
+	public Order timKiemTheoOrderID(String orderID){
 		return dao.timKiemTheoOrderID(orderID);
 	}
 	
@@ -24,7 +24,7 @@ public class OrderBO {
 		return dao.them(order);
 	}
 	
-	public boolean xoa(long orderID) {
+	public boolean xoa(String orderID) {
 		return dao.xoa(orderID);
 	}
 	

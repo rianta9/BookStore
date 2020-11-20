@@ -8,25 +8,32 @@ import java.util.ArrayList;
 import bean.MonHang;
 import bean.Order;
 import bean.OrderDetail;
-import bo.Tool;
 import jdbc.ThietLap;
+import tools.Tool;
 
 public class OrderDetailDAO {
+	
+	private ThietLap thietLap;
+	
+	public OrderDetailDAO() {
+		thietLap = new ThietLap();
+		thietLap.connect();
+	}
 	/**
 	 * Tìm kiếm một order theo mã
 	 * @param orderID
 	 * @return
 	 */
-	public ArrayList<OrderDetail> timkiemTheoOrderID(long orderID){
+	public ArrayList<OrderDetail> timkiemTheoOrderID(String orderID){
 		ArrayList<OrderDetail> result = new ArrayList<OrderDetail>();
-		String sql = "select * from OrderDetail where OrderID = ?";
+		String sql = "select * from [OrderDetails] where OrderID = ?";
 		PreparedStatement c;
 		try {
-			c = ThietLap.cn.prepareStatement(sql);
-			c.setLong(1, orderID);
+			c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, orderID);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
-				long orderDetailID = rs.getLong("OrderDetailID");
+				String orderDetailID = rs.getString("OrderDetailID").trim();
 				Date ngayNhan = rs.getDate("NgayNhan");
 				String maHang = rs.getString("MaSach").trim();
 				int soLuong = rs.getInt("SoLuong");
@@ -40,47 +47,24 @@ public class OrderDetailDAO {
 		return result;
 	}
 	
-//	public ArrayList<Order> timKiemTheoUserID(int userID){
-//		ArrayList<Order> result = null;
-//		String sql = "select * from Order where NickName = ?";
-//		PreparedStatement c;
-//		try {
-//			c = ThietLap.cn.prepareStatement(sql);
-//			c.setInt(1, userID);
-//			ResultSet rs = c.executeQuery();
-//			while(rs.next()) {
-//				int orderID = rs.getInt("OrderID");
-//				Date dateCreated = rs.getDate("DateCreated");
-//				String nickname = rs.getString("Nickname").trim();
-//				Date deliveryDate = rs.getDate("DeliveryDate");
-//				String shipInfo = rs.getNString("ShipInfo").trim();
-//				String discountCode = rs.getString("DiscountCode").trim();
-//				result.add(new Order(orderID, dateCreated, nickname, ngayNhan, shipInfo, discountCode));
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Loi tim ma!");
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
-//	
-//	public boolean them(Order order) {
-//		boolean result = false;
-//		try {
-//			String sql = "insert into Order(DateCreated, Nickname, DeliveryDate, ShipInfo, DiscountCode) values (?, ?, ?, ?, ?)";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
-//			c.setDate(1, order.getDateCreated());//manv
-//			c.setString(2, order.getNickname()); // hoten
-//			c.setDate(3, order.getDeliveryDate()); // ngaysinh
-//			c.setNString(4, order.getShipInfo()); //true = nam , false = nu
-//			c.setString(5, order.getDiscountCode()); // madv
-//			if(c.executeUpdate() == 1) result = true;
-//		} catch (Exception e) {
-//			System.out.println("Loi khi them");
-//			e.printStackTrace();
-//		} 
-//		return result;
-//	}
+
+	public boolean them(OrderDetail order) {
+		boolean result = false;
+		try {
+			String sql = "insert into [OrderDetails](OrderDetailID, OrderID, MaSach, SoLuong, SalePrice) values (?, ?, ?, ?, ?)";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, order.getOrderDetailID()); 
+			c.setString(2, order.getOrderID());
+			c.setString(3, order.getMonHang().getMaHang()); 
+			c.setInt(4, order.getMonHang().getSoLuong());
+			c.setDouble(5, order.getMonHang().getDonGia()); 
+			if(c.executeUpdate() == 1) result = true;
+		} catch (Exception e) {
+			System.out.println("Loi khi them");
+			e.printStackTrace();
+		} 
+		return result;
+	}
 //	
 //	/**
 //	 * Tìm kiếm liên kết giữa table order với một hoặc nhiều table khác. Nếu có return true.
@@ -92,7 +76,7 @@ public class OrderDetailDAO {
 //		String sql = "select * from OrderDetail where OrderID = ?";
 //		PreparedStatement c;
 //		try {
-//			c = ThietLap.cn.prepareStatement(sql);
+//			c = thietLap.cn.prepareStatement(sql);
 //			c.setInt(1, orderID);
 //			ResultSet rs = c.executeQuery();
 //			return rs.next();
@@ -115,7 +99,7 @@ public class OrderDetailDAO {
 //		try {
 //			// Sai cho nay, dung ? ko dung
 //			String sql = "delete from Order where OrderID = ?";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+//			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 //			c.setInt(1, orderID);
 //			if(c.executeUpdate() == 1) result = true;
 //		} catch (Exception e) {
@@ -129,7 +113,7 @@ public class OrderDetailDAO {
 //		boolean result = false;
 //		try {
 //			String sql = "UPDATE Order SET DateCreated = ? , Nickname = ? , DeliveryDate = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
-//			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+//			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 //			c.setDate(1, order.getDateCreated()); // hoten
 //			c.setString(2, order.getNickname()); // ngaysinh
 //			c.setDate(3, order.getDeliveryDate()); //true = nam , false = nu
