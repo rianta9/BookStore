@@ -155,6 +155,7 @@ public class UserDAO {
 		// Tìm kiếm liên kết với table ...
 	}
 	
+	
 	/**
 	 * Xoá một dòng dữ liệu trong table Order
 	 * @param orderID
@@ -220,6 +221,50 @@ public class UserDAO {
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
 			System.out.println("Loi khi sua!");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Kiểm tra email đã tồn tại trong csdl hay chưa
+	 * @param email
+	 * @return
+	 */
+	public boolean isValidEmail(String email) {
+		if(!Tool.isEmail(email)) return false;
+		boolean result = true;
+		try {
+			String sql = "select * from [User] where email = ?";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, email);
+			
+			if(c.executeQuery().next()) result = false; // tồn tại email
+		} catch (Exception e) {
+			System.out.println("Loi khi sua!");
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * Kiểm tra phone đã tồn tại trong csdl hay chưa
+	 * @param phone
+	 * @return
+	 */
+	public boolean isAvailablePhone(String phone) {
+		boolean result = true;
+		try {
+			String sql = "select * from [User] where phone = ?";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, phone);
+			
+			if(c.executeQuery().next()) result = false; // tồn tại email
+		} catch (Exception e) {
+			System.out.println("Loi khi sua!");
+			result = false;
 			e.printStackTrace();
 		}
 		return result;

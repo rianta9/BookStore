@@ -45,33 +45,36 @@ public class ThanhToanController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		GioHang gioHang = (GioHang)session.getAttribute("Gio"); 
-		if(gioHang == null){
-			gioHang = new GioHang();
-			session.setAttribute("Gio", gioHang);
-		}
 		
-		User user = (User)session.getAttribute("user");
-		if(user == null) {
-			response.sendRedirect("LoginController");
-			return;
+		// Nếu giỏ hàng = null || giỏ hàng rỗng thì ko thanh toán
+		if(gioHang == null || gioHang.getList().isEmpty()){ 
+			response.sendRedirect("SachController");
 		}
-		
 		else {
-			String orderID = RandomUUID.getRandomID();
-			Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
-			
-			OrderBO orderBo = new OrderBO();
-			orderBo.them(order);
-			
-			
-			OrderDetailBO orderDetailBo = new OrderDetailBO();
-			ArrayList<MonHang> list = gioHang.getList();
-			for (MonHang monHang : list) {
-				orderDetailBo.them(new OrderDetail(RandomUUID.getRandomID(), orderID, null, monHang));
+			User user = (User)session.getAttribute("user");
+			if(user == null) {
+				response.sendRedirect("LoginController");
+				return;
 			}
-			session.removeAttribute("Gio");
-			response.sendRedirect("LichSuMuaHangController");
+			
+			else {
+				String orderID = RandomUUID.getRandomID();
+				Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
+				
+				OrderBO orderBo = new OrderBO();
+				orderBo.them(order);
+				
+				
+				OrderDetailBO orderDetailBo = new OrderDetailBO();
+				ArrayList<MonHang> list = gioHang.getList();
+				for (MonHang monHang : list) {
+					orderDetailBo.them(new OrderDetail(RandomUUID.getRandomID(), orderID, null, monHang));
+				}
+				session.removeAttribute("Gio"); // Mua Hàng thành công thì xoá giỏ
+				response.sendRedirect("LichSuMuaHangController");
+			}
 		}
+		
 		
 		
 		

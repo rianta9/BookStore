@@ -42,6 +42,7 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	max-width: 96%;
 }
 
 .product-img {
@@ -114,4 +115,8 @@
 
 .payment{
 	padding: 10px;
+}
+
+.product-img > a{
+	max-width: 100%;
 }
