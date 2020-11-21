@@ -112,7 +112,7 @@
 									<p>
 										Đơn giá:
 										<%=monHang.getDonGia()%></p>
-									<a href="xoa.jsp?mahang=<%=monHang.getMaHang()%>"
+									<a href="RemoveItemCart?id=<%=monHang.getMaHang()%>"
 										class="btn btn-danger buy" name="xoa">Xóa</a>
 								</div>
 							</li>
@@ -135,7 +135,7 @@
 						</h4>
 						<form action="ThanhToanController" method="post">
 							<input type="submit" name="thanhtoan" value="Thanh Toán"
-							class="btn btn-success"
+							class="button dark br-10"
 							style="display: block; margin: 0 auto; padding: 10px 100px; border-radius: 25px">
 						</form>
 					</div>
