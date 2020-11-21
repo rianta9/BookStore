@@ -1,6 +1,5 @@
 *{
 	font-family: sans-serif;	
-	color: #292929;
 	margin: 0;
 	padding: 0;
 }
@@ -168,7 +167,7 @@ ul.dropdown-menu > li > a{
 
 
 
-a.light{
+.light{
 	background-color: white;
 	color: #292929;
 	border: 1px solid white;
@@ -304,3 +303,52 @@ a.light{
 	max-width: 96%;	
 }
 
+#footer{
+	background-color: #292929;
+	color: #fff;
+}
+
+
+.footer-content a{
+	color: #fff;
+}
+
+
+
+.policy{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.policy a:hover{
+	text-decoration: underline;
+}
+
+.policy > div{
+	margin-right: 30px;
+	line-height: 1.3;
+}
+
+.policy li{
+	list-style-type: none;
+	line-height: 2;
+}
+
+.policy h1, .policy h2, .policy h3, .policy h4, .policy h5{
+	color: #fff;
+}
+
+.email-form, .communication{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.email-form > div{
+	margin: 10px;
+}
+
+.communication > p{
+	margin: 10px;
+}
