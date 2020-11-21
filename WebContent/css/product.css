@@ -120,3 +120,18 @@
 .product-img > a{
 	max-width: 100%;
 }
+
+@media only screen and (max-width: 1023px) {
+	.list-product {
+	
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 8px;
+		padding: 10px;
+		margin: 1px;
+	}
+	.product-block {
+		display: block;
+		margin: 0 auto;
+	}
+}
