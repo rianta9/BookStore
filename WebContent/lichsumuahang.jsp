@@ -1,3 +1,4 @@
+<%@page import="bean.GioHang"%>
 <%@page import="bean.User"%>
 <%@page import="bean.Order"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,6 +20,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 	<!-- SECTION NAVBAR -->
 	<section id="navbar">
 		<nav class="navbar navbar-default">
@@ -28,9 +31,13 @@
 						src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
 						width="120px" height="20px"></a>
 				</div>
-
+				<%
+				GioHang gioHang = (GioHang)session.getAttribute("Gio");
+				int soLuong = 0;
+				if(gioHang != null) soLuong = gioHang.getList().size();
+				%>
 				<ul class="nav navbar-nav">
-					<li><a href="GioHangController">Giỏ Hàng</a></li>
+					<li><a href="GioHangController">Giỏ Hàng<%if(soLuong != 0) {%> (<%=soLuong%>) <%} %></a></li>
 					<li><a href="#">Thanh Toán</a></li>
 					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
 					<li>
