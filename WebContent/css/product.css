@@ -105,15 +105,22 @@
 
 .payment-cart{
 	padding: 10px;
-	height: 675px;
+	margin-bottom: 10px;
+	background-color: #fff;
 }
 
 .payment-cart > ul > li{
-	background: #ddd;
+	background: #fff;
 	margin-bottom: 10px;
 }
 
+
+.payment-cart > ul > li:hover{
+	box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
 .payment{
+	background-color: #fff;
 	padding: 10px;
 }
 

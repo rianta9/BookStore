@@ -39,36 +39,38 @@
 					<li><a href="#">Thanh Toán</a></li>
 					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
 					<li>
-					<form action="SachController">
-						<div class="search-form1">
-							<input type="text" class="search-input" placeholder="Search"
-								name="search">
-							<button class="search-button" type="submit">Search</button>
-						</div>
-					</form>
+						<form action="SachController">
+							<div class="search-form1">
+								<input type="text" class="search-input" placeholder="Search"
+									name="search">
+								<button class="search-button" type="submit">Search</button>
+							</div>
+						</form>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<%
-					User userLog = (User)session.getAttribute("user");
-					if(userLog == null){%>
-					
-					<li><a
-						href="SignUpController"><span class="glyphicon glyphicon-user"></span>
-							Sign Up</a></li>
-					<li><a
-						href="LoginController"> <span
+						User userLog = (User) session.getAttribute("user");
+					if (userLog == null) {
+					%>
+
+					<li><a href="SignUpController"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="LoginController"> <span
 							class="glyphicon glyphicon-log-in"></span> Login
 					</a></li>
-					<%} else{%>
+					<%
+						} else {
+					%>
 					<li><a href="ProfileController"> <span
-							class="glyphicon glyphicon-user"></span> Xin chào, <%=userLog.getName() %>
+							class="glyphicon glyphicon-user"></span> Xin chào, <%=userLog.getName()%>
 					</a></li>
-					<li><a
-						href="LogoutController"> <span
+					<li><a href="LogoutController"> <span
 							class="glyphicon glyphicon-log-out"></span> Logout
 					</a></li>
-					<%} %>
+					<%
+						}
+					%>
 				</ul>
 			</div>
 		</nav>
@@ -87,33 +89,43 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="payment-cart rounder-4">
+					<h3 align="center">Giỏ Hàng</h3>
 						<ul class="list-group">
 							<%
 								for (MonHang monHang : list) {
 								Sach sach = sbo.find(monHang.getMaHang());
 							%>
 							<li class="list-group-item rounder-4">
-								<div>
-									<p>
-										Tên sách:
-										<%=sach.getTensach()%></p>
-									<p>
-										Mã sách:
-										<%=monHang.getMaHang()%></p>
-									<p>
-									<form method="post"
-										action="sua.jsp?mahang=<%=monHang.getMaHang()%>">
-										Số lượng: <input type="number" name="soluong"
-											value="<%=monHang.getSoLuong()%> đ"> <input
-											type="submit" name="chinhsua" value="Lưu">
-									</form>
+								<div class="cart-item">
+								<div class="item-remove">
+									<a href="RemoveItemCart?id=<%=monHang.getMaHang()%>" name="xoa"><span class="glyphicon glyphicon-remove-circle	
+									"></span></a>
+								</div>
+									<div class = "item-content">
+										<h4><%=sach.getTensach()%></h4>
+										<p>
+											Tác giả:
+											<%=sach.getTacgia()%></p>
+										<p>
+										<form method="post"
+											action="UpdateItemCart?id=<%=monHang.getMaHang()%>">
+											Số lượng: 
+											<input type="number" id="quantity" value="<%=monHang.getSoLuong()%>" name="quantity" min="1" max="1000">
+  											<input type="submit" name = "update" value = "Lưu" class = "dark-btn br-2">
+										</form>
 
-									</p>
-									<p>
-										Đơn giá:
-										<%=monHang.getDonGia()%></p>
-									<a href="xoa.jsp?mahang=<%=monHang.getMaHang()%>"
-										class="btn btn-danger buy" name="xoa">Xóa</a>
+										</p>
+										<p>
+											Đơn giá:
+											<%=monHang.getDonGia()%> đ</p>
+										
+									</div>
+
+									<div class="item-image">
+										<img class="cart-item-img" alt="<%=sach.getTensach()%>"
+											src="<%=sach.getAnh()%>">
+
+									</div>
 								</div>
 							</li>
 
@@ -135,8 +147,8 @@
 						</h4>
 						<form action="ThanhToanController" method="post">
 							<input type="submit" name="thanhtoan" value="Thanh Toán"
-							class="btn btn-success"
-							style="display: block; margin: 0 auto; padding: 10px 100px; border-radius: 25px">
+								class="button dark br-10"
+								style="display: block; margin: 0 auto; padding: 10px 100px; border-radius: 25px">
 						</form>
 					</div>
 				</div>
@@ -144,10 +156,23 @@
 					} else {
 				%>
 				<p align="center">Bạn không có sản phẩm nào trong giỏ!</p>
-				<p align="center">Hãy tiếp tục <a class = "button dark" href="SachController">Mua Hàng</a></p>
-				<%} %>
+				<p align="center">
+					Hãy tiếp tục <a class="button dark" href="SachController">Mua
+						Hàng</a>
+				</p>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		$("input.product-quantity").on("keypress keyup blur",function (e) {    
+		    $(this).val($(this).val().replace(/^[a-zA-Z]+$/, ""));
+		        if ((e.which < 48 || e.which > 57)) {
+		            e.preventDefault();
+		    }
+		});
+	</script>
 </body>
 </html>
