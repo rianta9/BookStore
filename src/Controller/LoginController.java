@@ -26,7 +26,8 @@ public class LoginController extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
-
+		
+		
 
 		HttpSession session = req.getSession();
 		// Nếu user đã đăng nhập thì không cho phép đăng ký nữa

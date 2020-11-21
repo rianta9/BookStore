@@ -98,7 +98,7 @@
 							<li class="list-group-item rounder-4">
 								<div class="cart-item">
 								<div class="item-remove">
-									<a href="RemoveItemCart?id=<%=monHang.getMaHang()%>" name="xoa"><span class="glyphicon glyphicon-remove-circle	
+									<a href="RemoveItemCart?id=<%=monHang.getMaHang()%>" name="xoa" title="Xoá Sản Phẩm"><span class="glyphicon glyphicon-remove-circle	
 									"></span></a>
 								</div>
 									<div class = "item-content">
@@ -157,7 +157,7 @@
 				%>
 				<p align="center">Bạn không có sản phẩm nào trong giỏ!</p>
 				<p align="center">
-					Hãy tiếp tục <a class="button dark" href="SachController">Mua
+					Hãy tiếp tục <a class="button dark br-5" href="SachController">Mua
 						Hàng</a>
 				</p>
 				<%
