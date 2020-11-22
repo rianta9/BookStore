@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import bean.MaGiamGia;
 import bean.Order;
+import bean.User;
 import jdbc.ThietLap;
 
 public class OrderDAO {	
@@ -25,7 +27,7 @@ public class OrderDAO {
 	 */
 	public Order timKiemTheoOrderID(String orderID){
 		Order result = null;
-		String sql = "select * from [Order] where OrderID = ?";
+		String sql = "select * from [View_Order] where OrderID = ?";
 		PreparedStatement c;
 		try {
 			c = thietLap.cn.prepareStatement(sql);
@@ -34,11 +36,12 @@ public class OrderDAO {
 			if(rs.next()) {
 				Date dateCreated = rs.getDate("DateCreated");
 				long userID = rs.getLong("UserID");
+				String fullName = rs.getNString("FullName");
 				String shipInfo = rs.getNString("ShipInfo");
 				if(shipInfo != null) shipInfo = shipInfo.trim();
 				String discountCode = rs.getString("DiscountCode");
 				if(discountCode != null) discountCode = discountCode.trim();
-				result = new Order(orderID, dateCreated, userID, shipInfo, discountCode);
+				result = new Order(orderID, dateCreated, new User(userID, fullName), shipInfo, new MaGiamGia(discountCode));
 			}
 		} catch (Exception e) {
 			System.out.println("Loi tim ma!");
@@ -49,7 +52,7 @@ public class OrderDAO {
 	
 	public ArrayList<Order> timKiemTheoUserID(long userID){
 		ArrayList<Order> result = new ArrayList<Order>();
-		String sql = "select * from [Order] where userID = ?";
+		String sql = "select * from [View_Order] where userID = ?";
 		PreparedStatement c;
 		try {
 			c = thietLap.cn.prepareStatement(sql);
@@ -58,9 +61,10 @@ public class OrderDAO {
 			while(rs.next()) {
 				String orderID = rs.getString("OrderID");
 				Date dateCreated = rs.getDate("DateCreated");
+				String fullName = rs.getNString("FullName");
 				String shipInfo = rs.getNString("ShipInfo").trim();
 				String discountCode = rs.getString("DiscountCode");
-				result.add(new Order(orderID, dateCreated, userID, shipInfo, discountCode));
+				result.add(new Order(orderID, dateCreated, new User(userID, fullName), shipInfo, new MaGiamGia(discountCode)));
 			}
 		} catch (Exception e) {
 			System.out.println("Loi tim ma!");
@@ -74,9 +78,9 @@ public class OrderDAO {
 		try {
 			String sql = "insert into [Order](UserID, ShipInfo, DiscountCode, OrderID) values (?, ?, ?, ?)";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
-			c.setLong(1, order.getUserID()); 
+			c.setLong(1, order.getUser().getUserID()); 
 			c.setNString(2, order.getShipInfo()); 
-			c.setString(3, order.getDiscountCode()); 
+			c.setString(3, order.getDiscountCode().getCode()); 
 			c.setString(4, order.getOrderID());
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
@@ -135,9 +139,9 @@ public class OrderDAO {
 			String sql = "UPDATE [Order] SET DateCreated = ? , UserID = ? , ShipInfo = ? , DiscountCode = ? WHERE OrderID = ?";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			c.setDate(1, order.getDateCreated()); // hoten
-			c.setLong(2, order.getUserID()); // ngaysinh
+			c.setLong(2, order.getUser().getUserID()); // ngaysinh
 			c.setNString(3, order.getShipInfo()); //hsl
-			c.setString(4, order.getDiscountCode()); // madv
+			c.setString(4, order.getDiscountCode().getCode()); // madv
 			if(c.executeUpdate() == 1) result = true;
 		} catch (Exception e) {
 			System.out.println("Loi khi sua!");

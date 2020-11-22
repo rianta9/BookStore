@@ -59,10 +59,10 @@ public class ThanhToanController extends HttpServlet {
 			
 			else {
 				String orderID = RandomUUID.getRandomID();
-				Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
-				
+				Order order = new Order(orderID, null, user, "Theo địa chỉ khách hàng", null);
+				//TODO: code phần mã giảm giá
 				OrderBO orderBo = new OrderBO();
-				orderBo.them(order);
+				orderBo.them(order); // thêm vào database
 				
 				
 				OrderDetailBO orderDetailBo = new OrderDetailBO();

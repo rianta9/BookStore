@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import bean.LoaiSach;
 import bean.Sach;
+import bean.TacGia;
 import jdbc.ThietLap;
 
 public class SachDAO {
@@ -19,21 +20,6 @@ public class SachDAO {
 		thietLap = new ThietLap();
 		thietLap.connect();
 	}
-
-	public ArrayList<Sach> getSach() {
-		list = new ArrayList<Sach>();
-		list.add(new Sach("s1","Đắc Nhân Tâm","Daniel Carnegie",10000,"images//a1.jpg","tieuthuyet"));
-		list.add(new Sach("s2","Tôi Tài Giỏi Bạn Cũng Thế","Adam Khoo",10000,"images//a2.jpg","lightnovel"));
-		list.add(new Sach("s3","Làm Chủ Tư Duy Thay Đổi Vận Mệnh","Adam Khoo",50000,"images//a3.jpg","manga"));
-		list.add(new Sach("s4","Cảm Xúc Là Kẻ Thù Số Một Của Thành Công","Lê Thẩm Dương",100000,"images//a4.jpg","tamlyhoc"));
-		list.add(new Sach("s5","Code Dạo Ký Sự","Phạm Huy Hoàng",10000,"images//a5.jpg","trinhtham"));
-		list.add(new Sach("s6","Quẳng Gánh Lo Đi Mà Vui Sống","Daniel Carnegie",50000,"images//a6.jpg","ngontinh"));
-		list.add(new Sach("s6","Người Giỏi Không Bởi Học Nhiều","Alpha Book Biên Soạn",90000,"images//a6.jpg","ngontinh"));
-		list.add(new Sach("s6","Giới Hạn Của Bạn Là Xuất Phát Điểm Của Người Khác","Mèo Maverick",100000,"images//a6.jpg","ngontinh"));
-
-		return list;
-	}
-	
 	
 	private Long toLong(BigDecimal a) {
 		double n = Double.valueOf(a.toString());
@@ -43,19 +29,23 @@ public class SachDAO {
 	public ArrayList<Sach> docDatabase() {
 		list = new ArrayList<Sach>();
 		try {
-			String sql = "select * from [Sach] as s join [TacGia] as t on s.MaTacGia = t.maTacGia";
+			String sql = "select * from [Sach] as s left join [TacGia] as t on s.MaTacGia = t.maTacGia";
 			PreparedStatement c = thietLap.cn.prepareStatement(sql);
 			ResultSet data = c.executeQuery();
 			
 			if(data == null) System.out.println("Data null");
 			while(data.next()) {
 				String masach = String.valueOf(data.getInt("MaSach"));
-				String tensach = data.getNString("TenSach").trim();
+				String tensach = data.getNString("TenSach");
 				Long gia = toLong(data.getBigDecimal("GiaBan"));
-				String tacgia = data.getString("TenTacGia").trim();
-				String anh = data.getString("BiaSach").trim();
+				String maTacGia = data.getString("MaTacGia").trim();
+				//TODO: Dùng TacGiaDao để lấy thông tin
+				String tenTacGia = data.getString("TenTacGia");
+				String info = data.getString("Info");
+				String hinhAnh = data.getString("hinhAnh");
+				String anh = data.getString("BiaSach");
 				String maloai = data.getString("MaLoaiSach").trim();
-				list.add(new Sach(masach, tensach, tacgia, gia, anh, maloai));
+				list.add(new Sach(masach, tensach, new TacGia(maTacGia, tenTacGia, info, hinhAnh), gia, anh, new LoaiSach(maloai)));
 			}
 			data.close();
 		} catch (Exception e){
@@ -88,7 +78,7 @@ public class SachDAO {
 		ArrayList<Sach> result = new ArrayList<Sach>();
 		if(list != null) {
 			for (Sach sach : list) {
-				if(sach.getTacgia().toLowerCase().contains(text.toLowerCase())) {
+				if(sach.getTacGia().getTenTacGia().toLowerCase().contains(text.toLowerCase())) {
 					result.add(sach);
 				}
 			}
@@ -100,7 +90,7 @@ public class SachDAO {
 		ArrayList<Sach> result = new ArrayList<Sach>();
 		if(list != null) {
 			for (Sach sach : list) {
-				if(sach.getTacgia().toLowerCase().contains(text.toLowerCase()) || sach.getTensach().toLowerCase().contains(text.toLowerCase())) {
+				if(sach.getTacGia().getTenTacGia().toLowerCase().contains(text.toLowerCase()) || sach.getTensach().toLowerCase().contains(text.toLowerCase())) {
 					result.add(sach);
 				}
 			}
@@ -117,7 +107,7 @@ public class SachDAO {
 		ArrayList<Sach> result = new ArrayList<Sach>();
 		if(list != null) {
 			for (Sach sach : list) {
-				if(sach.getMaloai().toLowerCase().equals(tag.toLowerCase())) {
+				if(sach.getLoaiSach().getMaLoai().toLowerCase().equals(tag.toLowerCase())) {
 					result.add(sach);
 				}
 			}

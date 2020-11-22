@@ -23,67 +23,10 @@
 </head>
 <body>
 
-
 	<!-- SECTION NAVBAR -->
-	<section id="navbar">
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="SachController"><img
-						src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
-						width="120px" height="20px"></a>
-				</div>
-				<%
-					GioHang gioHang = (GioHang) session.getAttribute("Gio");
-				int soLuong = 0;
-				if (gioHang != null)
-					soLuong = gioHang.getList().size();
-				%>
-				<ul class="nav navbar-nav">
-					<li><a href="GioHangController">Giỏ Hàng<%
-						if (soLuong != 0) {
-					%> (<%=soLuong%>) <%
-						}
-					%></a></li>
-					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
-					<li>
-						<form action="SachController">
-							<div class="search-form1">
-								<input type="text" class="search-input" placeholder="Search"
-									name="search">
-								<button class="search-button" type="submit">Search</button>
-							</div>
-						</form>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<%
-						User userLog = (User) session.getAttribute("user");
-					if (userLog == null) {
-					%>
 
-					<li><a href="SignUpController"><span
-							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a href="LoginController"> <span
-							class="glyphicon glyphicon-log-in"></span> Login
-					</a></li>
-					<%
-						} else {
-					%>
-					<li><a href="ProfileController"> <span
-							class="glyphicon glyphicon-user"></span> Xin chào, <%=userLog.getName()%>
-					</a></li>
-					<li><a href="LogoutController"> <span
-							class="glyphicon glyphicon-log-out"></span> Logout
-					</a></li>
-					<%
-						}
-					%>
-				</ul>
-			</div>
-		</nav>
-	</section>
+	<jsp:include page="navbar.jsp"></jsp:include>
+	<!-- END SECTION NAVBAR -->
 
 
 
@@ -103,7 +46,7 @@
 			<div class="row">
 
 				<!-- Categories -->
-				<div class="col-md-3">
+				<div class="col-sm-4 col-md-3">
 					<form action="SachController">
 						<ul class="list-group">
 							<li class="list-group-item menu-title">Nhóm Sản Phẩm</li>
@@ -125,7 +68,7 @@
 
 
 				<!-- Product List -->
-				<div class="col-md-9">
+				<div class="col-sm-8 col-md-9">
 					<div class="list-product">
 						<%
 							for (int i = 0; i < n; i++) {
@@ -140,9 +83,10 @@
 							<div class="product-detail">
 								<div class="box-pro-detail">
 									<h3 class="pro-name">
-										<a href="ProductController?id=<%=sach.getMasach()%>" title="<%=sach.getTensach()%>"><%=sach.getTensach()%></a>
+										<a href="ProductController?id=<%=sach.getMasach()%>"
+											title="<%=sach.getTensach()%>"><%=sach.getTensach()%></a>
 									</h3>
-									<h5 class="pro-author"><%=sach.getTacgia()%></h5>
+									<h5 class="pro-author"><%=sach.getTacGia().getTenTacGia()%></h5>
 									<div class="box-pro-prices">
 										<p class="pro-price">
 											<span><%=sach.getGia()%> đ</span>
@@ -166,62 +110,10 @@
 		</div>
 	</section>
 
+	<!-- SECTION FOOTER -->
 
-	<section id="footer">
-		<div class="container-fluid">
-			<div class="footer-content br-3">
-				<div class="email-form pd-10">
-					<div>
-						<span class="glyphicon glyphicon-envelope	
-					"></span> Đăng Ký
-						Nhận Bản Tin
-					</div>
-					<div>
-						<form action="#">
-							<input type="email" placeholder="Nhập địa chỉ email của bạn"
-								name="email" size="48" class="pd-8 br-2"> <input
-								type="submit" value="Đăng Ký" class="light pd-8 br-2">
-						</form>
-					</div>
-				</div>
-				<div class="policy">
-					<div class="web-info">
-						<h3>Dịch Vụ</h3>
-						<ul>
-							<li><a href="#">Điều khoản sử dụng</a></li>
-							<li><a href="#">Chính sách bảo mật</a></li>
-							<li><a href="#">Giới thiệu</a></li>
-						</ul>
-					</div>
-					<div class="web-info">
-						<h3>Hỗ Trợ</h3>
-						<ul>
-							<li><a href="#">Chính sách đổi - trả - hoàn tiền</a></li>
-							<li><a href="#">Phương thức vận chuyển</a></li>
-							<li><a href="#">Phương thức thanh toán và xuất HĐ</a></li>
-						</ul>
-					</div>
-					<div class="web-info">
-						<h3>Tài Khoản Của Tôi</h3>
-						<ul>
-							<li><a href="#">Đăng nhập/Tạo mới tài khoản</a></li>
-							<li><a href="#">Thay đổi địa chỉ khách hàng</a></li>
-							<li><a href="#">Lịch sử mua hàng</a></li>
-						</ul>
-					</div>
-
-				</div>
-				<div class="communication">
-					<p><span class="glyphicon glyphicon-map-marker">	
-					</span> Nguyễn Huệ, Huế, Việt Nam</p>
-					<p><span class="glyphicon glyphicon-envelope">	
-					</span> fa@rianta9.com</p>
-					<p><span class="glyphicon glyphicon-earphone">		
-					</span> 1900100n</p>
-				</div>
-			</div>
-		</div>
-	</section>
+	<jsp:include page="footer.jsp"></jsp:include>
+	<!--END SECTION FOOTER -->
 
 	<script>
 		// Get the modal

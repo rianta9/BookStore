@@ -10,8 +10,8 @@ body {
 	color: #292929;
 	overflow-x: hidden;
 	background-color: #f0f0f0;
-	position: initial !important;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
 	color: #292929;
@@ -32,12 +32,20 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 	line-height: 1.1;
 }
 
+#view{
+	min-height: 768px;
+}
+
 @media (min-width: 768px) {
 	.navbar-nav.navbar-center {
 		position: absolute;
 		left: 50%;
 		transform: translatex(-50%);
 	}
+}
+
+ul, li{
+	list-style-type: none;
 }
 
 img.brand{
@@ -266,6 +274,18 @@ ul.dropdown-menu > li > a{
 	padding: 20px;
 }
 
+.mb-10{
+	margin-bottom: 10px;
+}
+
+.mb-15{
+	margin-bottom: 15px;
+}
+
+.mb-20{
+	margin-bottom: 20px;
+}
+
 .cart-item{
 	position: relative;
 	display: flex;
@@ -316,9 +336,7 @@ ul.dropdown-menu > li > a{
 
 
 .policy{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	margin: 10px auto;
 }
 
 .policy a:hover{
@@ -326,24 +344,24 @@ ul.dropdown-menu > li > a{
 }
 
 .policy > div{
-	margin-right: 30px;
+	display: block;
+	width: 300px;
+	margin: 10px auto;
 	line-height: 1.3;
 }
 
-.policy li{
+.policy ul{
 	list-style-type: none;
 	line-height: 2;
 }
+
+
 
 .policy h1, .policy h2, .policy h3, .policy h4, .policy h5{
 	color: #fff;
 }
 
-.email-form, .communication{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+
 
 .email-form > div{
 	margin: 10px;

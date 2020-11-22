@@ -105,7 +105,7 @@
 						<div>
 							<h4>Mã order: <%=order.getOrderID()%></h4>
 							<h4>Địa chỉ giao hàng: <%=order.getShipInfo()%></h4>
-							<h4>Mã giảm giá: <% if(order.getDiscountCode() != null){%> <%=order.getDiscountCode() %> <%}else {%> Không có <%}%></h4>
+							<h4>Mã giảm giá: <% if(order.getDiscountCode() != null){%> <%=order.getDiscountCode().getCode() %> <%}else {%> Không có <%}%></h4>
 							<h4>Thành tiền: </h4> //TODO: tính tổng tiền order
 						</div>
 						<ul class="list-group">
