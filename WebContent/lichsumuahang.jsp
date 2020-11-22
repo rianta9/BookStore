@@ -101,7 +101,7 @@
 										<%=order.getDateCreatedUtil()%></p>
 									
 									
-									<p><a href="chitietorder.jsp?id=<%=order.getOrderID()%>"
+									<p><a href="ChiTietDonHang?id=<%=order.getOrderID()%>"
 										class="btn btn-danger buy" name="xoa">Chi tiết</a></p>
 								</div>
 							</li>

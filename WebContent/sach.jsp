@@ -106,7 +106,7 @@
 				<div class="col-md-3">
 					<form action="SachController">
 						<ul class="list-group">
-							<li class="list-group-item">Nhóm Sản Phẩm</li>
+							<li class="list-group-item menu-title">Nhóm Sản Phẩm</li>
 
 							<%
 								for (int i = 0; i < m; i++) {
@@ -140,11 +140,11 @@
 							<div class="product-detail">
 								<div class="box-pro-detail">
 									<h3 class="pro-name">
-										<a href="ProductController?id=<%=sach.getMasach()%>"><%=sach.getTensach()%></a>
+										<a href="ProductController?id=<%=sach.getMasach()%>" title="<%=sach.getTensach()%>"><%=sach.getTensach()%></a>
 									</h3>
 									<h5 class="pro-author"><%=sach.getTacgia()%></h5>
 									<div class="box-pro-prices">
-										<p class="pro-price ">
+										<p class="pro-price">
 											<span><%=sach.getGia()%> đ</span>
 										</p>
 									</div>
@@ -179,7 +179,7 @@
 					<div>
 						<form action="#">
 							<input type="email" placeholder="Nhập địa chỉ email của bạn"
-								name="email" size="50" class="pd-8 br-2"> <input
+								name="email" size="48" class="pd-8 br-2"> <input
 								type="submit" value="Đăng Ký" class="light pd-8 br-2">
 						</form>
 					</div>
@@ -215,9 +215,9 @@
 					<p><span class="glyphicon glyphicon-map-marker">	
 					</span> Nguyễn Huệ, Huế, Việt Nam</p>
 					<p><span class="glyphicon glyphicon-envelope">	
-					</span> rianta9@gmail.com</p>
+					</span> fa@rianta9.com</p>
 					<p><span class="glyphicon glyphicon-earphone">		
-					</span> 03898xxxxx</p>
+					</span> 1900100n</p>
 				</div>
 			</div>
 		</div>

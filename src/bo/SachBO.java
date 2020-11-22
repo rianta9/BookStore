@@ -32,6 +32,10 @@ public class SachBO {
 		return dao.timTheoTenTacGia(text);
 	}
 	
+	public ArrayList<Sach> timKiemLienQuan(String text){
+		return dao.timKiemLienQuan(text);
+	}
+	
 	public ArrayList<Sach> locTheoLoaiSach(String tag){
 		return dao.locTheoLoaiSach(tag);
 	}

@@ -33,9 +33,11 @@ public class OrderDAO {
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
 				Date dateCreated = rs.getDate("DateCreated");
-				long userID = rs.getLong("Nickname");
-				String shipInfo = rs.getNString("ShipInfo").trim();
-				String discountCode = rs.getString("DiscountCode").trim();
+				long userID = rs.getLong("UserID");
+				String shipInfo = rs.getNString("ShipInfo");
+				if(shipInfo != null) shipInfo = shipInfo.trim();
+				String discountCode = rs.getString("DiscountCode");
+				if(discountCode != null) discountCode = discountCode.trim();
 				result = new Order(orderID, dateCreated, userID, shipInfo, discountCode);
 			}
 		} catch (Exception e) {
@@ -142,5 +144,27 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/**
+	 * Kiểm tra trùng khớp giữa orderID và userID
+	 * @param userID
+	 * @param orderID
+	 * @return
+	 */
+	public boolean match(long userID, String orderID) {
+		String sql = "select * from [Order] where OrderID = ? and userID = ?";
+		PreparedStatement c;
+		try {
+			c = thietLap.cn.prepareStatement(sql);
+			c.setString(1, orderID);
+			c.setLong(2, userID);
+			ResultSet rs = c.executeQuery();
+			return rs.next();
+		} catch (Exception e) {
+			System.out.println("Loi tim ma!");
+			e.printStackTrace();
+			return false; 
+		}
 	}
 }

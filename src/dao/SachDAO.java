@@ -1,6 +1,7 @@
 package dao;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,13 +43,16 @@ public class SachDAO {
 	public ArrayList<Sach> docDatabase() {
 		list = new ArrayList<Sach>();
 		try {
-			ResultSet data = thietLap.getTable("Sach");
+			String sql = "select * from [Sach] as s join [TacGia] as t on s.MaTacGia = t.maTacGia";
+			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			ResultSet data = c.executeQuery();
+			
 			if(data == null) System.out.println("Data null");
 			while(data.next()) {
 				String masach = String.valueOf(data.getInt("MaSach"));
 				String tensach = data.getNString("TenSach").trim();
 				Long gia = toLong(data.getBigDecimal("GiaBan"));
-				String tacgia = data.getString("MaTacGia").trim();
+				String tacgia = data.getString("TenTacGia").trim();
 				String anh = data.getString("BiaSach").trim();
 				String maloai = data.getString("MaLoaiSach").trim();
 				list.add(new Sach(masach, tensach, tacgia, gia, anh, maloai));
@@ -92,6 +96,17 @@ public class SachDAO {
 		return result;
 	}
 	
+	public ArrayList<Sach> timKiemLienQuan(String text){
+		ArrayList<Sach> result = new ArrayList<Sach>();
+		if(list != null) {
+			for (Sach sach : list) {
+				if(sach.getTacgia().toLowerCase().contains(text.toLowerCase()) || sach.getTensach().toLowerCase().contains(text.toLowerCase())) {
+					result.add(sach);
+				}
+			}
+		}
+		return result;
+	}
 	
 	/**
 	 * 

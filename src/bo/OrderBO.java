@@ -32,4 +32,7 @@ public class OrderBO {
 		return dao.sua(order);
 	}
 	
+	public boolean match(long userID, String orderID) {
+		return dao.match(userID, orderID);
+	}
 }

@@ -352,3 +352,8 @@ ul.dropdown-menu > li > a{
 .communication > p{
 	margin: 10px;
 }
+
+.menu-title{
+	font-weight: bolder;
+	text-transform: capitalize;
+}

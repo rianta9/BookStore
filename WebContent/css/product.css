@@ -63,6 +63,17 @@
 .pro-name {
 	font-size: 14px;
 	text-transform: capitalize;
+	font-weight: bolder;
+	height: 2em;
+}
+
+.pro-name > a{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	line-height: 1.4;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .pro-price {
