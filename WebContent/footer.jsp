@@ -36,14 +36,16 @@
 				 
 				<div class="policy-item">
 					<h3 align="center">Liên Hệ</h3>
-					<ul>
-						<li><span class="glyphicon glyphicon-map-marker"> </span>
-							Nguyễn Huệ, Huế, Việt Nam</li>
-						<li><span class="glyphicon glyphicon-envelope"> </span>
-							fa@rianta9.com</li>
-						<li><span class="glyphicon glyphicon-earphone"> </span>
-							1900100n</li>
-					</ul>
+					<table>
+						<tr>
+						<td class="p-4"><span class="glyphicon glyphicon-map-marker"> </span>
+							Nguyễn Huệ, Huế, Việt Nam</td>
+						<td><span class="glyphicon glyphicon-envelope"> </span>
+							fa@rianta9.com</td>
+						<td><span class="glyphicon glyphicon-earphone"> </span>
+							1900100n</td>
+						</tr>
+					</table>
 				</div>
 
 			</div>

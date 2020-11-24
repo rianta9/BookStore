@@ -4,39 +4,18 @@ body {
 	line-height: 1.2;
 }
 
-.modal-content .cancelbtn {
-	width: auto;
-	padding: 10px 18px;
-	background-color: #f44336;
-}
 
-/* The Close Button */
-.modal-content .close {
-	/* Position it in the top right corner outside of the modal */
-	position: absolute;
-	right: 15px;
-	top: 10px;
-	color: #000;
-	font-size: 35px;
-	font-weight: bold;
-}
 
-/* Close button on hover */
-.modal-content .modal-content .close:hover, .modal-content .close:focus {
-	color: red;
-	cursor: pointer;
-}
-
-.modal-content a, .modal-content a:active, .modal-content a:visited {
+a, a:active, a:visited {
 	text-decoration: none;
 	color: #000;
 }
 
-.modal-content a:hover {
+a:hover {
 	text-decoration: underline;
 }
 
-/*.loginform {
+.loginform {
 	color: #292929;
 	font-size: 16px;
 	display: flex;
@@ -47,47 +26,43 @@ body {
 	width: 100%;
 	margin-bottom: 50px;
 	padding: 0;
-}*/
-
-/*.signupform {
-	color: #292929;
-	font-size: 16px;
-	display: flex;
-	position: relative;
-	align-items: center;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 50px;
-	padding: 0;
-}*/
-
-/* The Modal (background) */
-.modal-login {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-	padding-top: 30px;
-	color: #292929;
 }
 
-/*.modal-signup {
+.signupform {
+	color: #292929;
+	font-size: 16px;
+	display: flex;
 	position: relative;
-	top: 5px;
-	width: 460px; 
+	align-items: center;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 50px;
+	padding: 0;
+}
+
+
+.modal {
+	position: relative;
+	top: 30px;
+	width: 390px; /* Full width */
 	max-width: 90%;
-	background-color: white; 
+	background-color: white; /* Fallback color */
 	color: #292929;
 	border-radius: 10px;
 	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
-}*/
+}
+
+.modal-signup {
+	position: relative;
+	top: 5px;
+	width: 460px; /* Full width */
+	max-width: 90%;
+	background-color: white; /* Fallback color */
+	color: #292929;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+}
 
 /* Modal Content/Box */
 .modal-content {
@@ -110,7 +85,7 @@ body {
 }
 
 /* Full-width input fields */
-.modal-content input[type=text], .modal-content input[type=password], .modal-content input[type=email], input[type=tel]
+input[type=text], input[type=password], input[type=email], input[type=tel]
 	{
 	width: 100%;
 	border-radius: 5px;
@@ -122,7 +97,7 @@ body {
 }
 
 /* Set a style for all buttons */
-.modal-content .button-lg {
+.button {
 	background-color: #292929;
 	color: white;
 	padding: 14px 20px;
@@ -146,18 +121,17 @@ body {
 	border-radius: 20px;
 }
 
-.modal-content .button-lg:hover {
+.button:hover {
 	border-color: #ffcc;
 }
 
-.modal-content .welcome {
+.welcome {
 	font-family: Poppins-Bold;
 	font-size: 30px;
 	font-weight: bold;
 	text-align: center;
 	color: #292929;
 	line-height: 1.2;
-	margin-bottom: 30px;
 }
 
 .modal-signup .welcome {
@@ -165,16 +139,17 @@ body {
 	margin-bottom: 20px;
 }
 
-.modal-content label {
+label {
+	margin-top: 50px;
 	font-family: Poppins-Bold;
 	font-size: 20px;
 }
 
-.modal-content .text-center {
+.text-center {
 	text-align: center;
 }
 
-.modal-content .error {
+.error {
 	font-size: 10px;
 	color: red;
 	margin-bottom: 20px;

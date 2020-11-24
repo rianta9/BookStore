@@ -27,6 +27,9 @@ public class MaGiamGia {
 		super();
 		this.code = code;
 	}
+	public MaGiamGia() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCode() {
 		return code;
 	}
