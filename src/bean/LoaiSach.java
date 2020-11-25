@@ -3,6 +3,11 @@ package bean;
 public class LoaiSach {
 	private String maLoai;
 	private String tenLoai;
+	
+	public LoaiSach(String maLoai) {
+		this.maLoai = maLoai;
+	}
+	
 	public LoaiSach(String maLoai, String tenLoai) {
 		super();
 		this.maLoai = maLoai;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.GioHang;
+import bean.MaGiamGia;
 import bean.MonHang;
 import bean.Order;
 import bean.OrderDetail;
@@ -59,10 +60,10 @@ public class ThanhToanController extends HttpServlet {
 			
 			else {
 				String orderID = RandomUUID.getRandomID();
-				Order order = new Order(orderID, null, user.getUserID(), "Theo địa chỉ khách hàng", null);
-				
+				Order order = new Order(orderID, null, user, "Theo địa chỉ khách hàng", new MaGiamGia());
+				//TODO: code phần mã giảm giá
 				OrderBO orderBo = new OrderBO();
-				orderBo.them(order);
+				orderBo.them(order); // thêm vào database
 				
 				
 				OrderDetailBO orderDetailBo = new OrderDetailBO();

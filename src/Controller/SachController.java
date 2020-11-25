@@ -51,7 +51,7 @@ public class SachController extends HttpServlet {
 			ArrayList<Sach> ds = sbo.getSach();
 			String search = request.getParameter("search");
 			if(search != null && !search.isEmpty()) {
-				ds = sbo.timTheoTenSach(search);
+				ds = sbo.timKiemLienQuan(search);
 			}
 			else{
 				String tag = request.getParameter("tag"); 

@@ -1,3 +1,4 @@
+<%@page import="bean.GioHang"%>
 <%@page import="bean.User"%>
 <%@page import="bean.Order"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,59 +20,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- SECTION NAVBAR -->
-	<section id="navbar">
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="SachController"><img
-						src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
-						width="120px" height="20px"></a>
-				</div>
 
-				<ul class="nav navbar-nav">
-					<li><a href="GioHangController">Giỏ Hàng</a></li>
-					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
-					<li>
-					<form action="SachController">
-						<div class="search-form1">
-							<input type="text" class="search-input" placeholder="Search"
-								name="search">
-							<button class="search-button" type="submit">Search</button>
-						</div>
-					</form>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<%
-					User userLog = (User)session.getAttribute("user");
-					if(userLog == null){%>
-					
-					<li><a
-						href="SignUpController"><span class="glyphicon glyphicon-user"></span>
-							Sign Up</a></li>
-					<li><a
-						href="LoginController"> <span
-							class="glyphicon glyphicon-log-in"></span> Login
-					</a></li>
-					<%} else{%>
-					<li><a href="ProfileController"> <span
-							class="glyphicon glyphicon-user"></span> Xin chào, <%=userLog.getName() %>
-					</a></li>
-					<li><a
-						href="LogoutController"> <span
-							class="glyphicon glyphicon-log-out"></span> Logout
-					</a></li>
-					<%} %>
-				</ul>
-			</div>
-		</nav>
-	</section>
+
+	<!-- SECTION NAVBAR -->
+
+	<jsp:include page="navbar.jsp"></jsp:include>
+	<!--END SECTION NAVBAR -->
 
 
 	<!-- Lịch sử mua hàng -->
-	<section class="view">
+	<section id="view">
 		<%
 		ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list-order");
 		if(!list.isEmpty()){
@@ -94,7 +52,7 @@
 										<%=order.getDateCreatedUtil()%></p>
 									
 									
-									<p><a href="chitietorder.jsp?id=<%=order.getOrderID()%>"
+									<p><a href="ChiTietDonHang?id=<%=order.getOrderID()%>"
 										class="btn btn-danger buy" name="xoa">Chi tiết</a></p>
 								</div>
 							</li>
@@ -120,5 +78,10 @@
 		</div>
 		</div>
 	</section>
+	
+	<!-- SECTION FOOTER -->
+
+	<jsp:include page="footer.jsp"></jsp:include>
+	<!--END SECTION FOOTER -->
 </body>
 </html>

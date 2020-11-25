@@ -1,4 +1,5 @@
 
+<%@page import="bean.GioHang"%>
 <%@page import="bean.User"%>
 <%@page import="bean.LoaiSach"%>
 <%@page import="bean.Sach"%>
@@ -22,56 +23,10 @@
 </head>
 <body>
 
-
 	<!-- SECTION NAVBAR -->
-	<section id="navbar">
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="SachController"><img
-						src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
-						width="120px" height="20px"></a>
-				</div>
 
-				<ul class="nav navbar-nav">
-					<li><a href="GioHangController">Giỏ Hàng</a></li>
-					<li><a href="#">Thanh Toán</a></li>
-					<li><a href="LichSuMuaHangController">Lịch Sử Mua Hàng</a></li>
-					<li>
-					<form action="SachController">
-						<div class="search-form1">
-							<input type="text" class="search-input" placeholder="Search"
-								name="search">
-							<button class="search-button" type="submit">Search</button>
-						</div>
-					</form>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<%
-					User userLog = (User)session.getAttribute("user");
-					if(userLog == null){%>
-					
-					<li><a
-						href="SignUpController"><span class="glyphicon glyphicon-user"></span>
-							Sign Up</a></li>
-					<li><a
-						href="LoginController"> <span
-							class="glyphicon glyphicon-log-in"></span> Login
-					</a></li>
-					<%} else{%>
-					<li><a href="ProfileController"> <span
-							class="glyphicon glyphicon-user"></span> Xin chào, <%=userLog.getName() %>
-					</a></li>
-					<li><a
-						href="LogoutController"> <span
-							class="glyphicon glyphicon-log-out"></span> Logout
-					</a></li>
-					<%} %>
-				</ul>
-			</div>
-		</nav>
-	</section>
+	<jsp:include page="navbar.jsp"></jsp:include>
+	<!-- END SECTION NAVBAR -->
 
 
 
@@ -91,10 +46,10 @@
 			<div class="row">
 
 				<!-- Categories -->
-				<div class="col-md-3">
+				<div class="col-sm-4 col-md-3">
 					<form action="SachController">
 						<ul class="list-group">
-							<li class="list-group-item">Nhóm Sản Phẩm</li>
+							<li class="list-group-item menu-title">Nhóm Sản Phẩm</li>
 
 							<%
 								for (int i = 0; i < m; i++) {
@@ -113,7 +68,7 @@
 
 
 				<!-- Product List -->
-				<div class="col-md-9">
+				<div class="col-sm-8 col-md-9">
 					<div class="list-product">
 						<%
 							for (int i = 0; i < n; i++) {
@@ -128,11 +83,12 @@
 							<div class="product-detail">
 								<div class="box-pro-detail">
 									<h3 class="pro-name">
-										<a href="ProductController?id=<%=sach.getMasach()%>"><%=sach.getTensach()%></a>
+										<a href="ProductController?id=<%=sach.getMasach()%>"
+											title="<%=sach.getTensach()%>"><%=sach.getTensach()%></a>
 									</h3>
-									<h5 class="pro-author"><%=sach.getTacgia()%></h5>
+									<h5 class="pro-author"><%=sach.getTacGia().getTenTacGia()%></h5>
 									<div class="box-pro-prices">
-										<p class="pro-price ">
+										<p class="pro-price">
 											<span><%=sach.getGia()%> đ</span>
 										</p>
 									</div>
@@ -153,6 +109,12 @@
 		</div>
 		</div>
 	</section>
+
+	<!-- SECTION FOOTER -->
+
+	<jsp:include page="footer.jsp"></jsp:include>
+	<!--END SECTION FOOTER -->
+
 	<script>
 		// Get the modal
 		var modal = document.getElementById('formlogin');

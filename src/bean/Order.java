@@ -8,16 +8,16 @@ import java.text.SimpleDateFormat;
 public class Order {
 	private String orderID;
 	private Date dateCreated;
-	private long userID;
+	private User user;
 	private String shipInfo;
-	private String discountCode;
+	private MaGiamGia discountCode;
 	
-	public Order(String orderID, Date dateCreated, long userID, String shipInfo,
-			String discountCode) {
+	public Order(String orderID, Date dateCreated, User user, String shipInfo,
+			MaGiamGia discountCode) {
 		super();
 		this.orderID = orderID;
 		this.dateCreated = dateCreated;
-		this.userID = userID;
+		this.user = user;
 		this.shipInfo = shipInfo;
 		this.discountCode = discountCode;
 	}
@@ -39,12 +39,12 @@ public class Order {
 		this.dateCreated = dateCreated;
 	}
 
-	public long getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserID(long userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getShipInfo() {
@@ -55,11 +55,11 @@ public class Order {
 		this.shipInfo = shipInfo;
 	}
 
-	public String getDiscountCode() {
+	public MaGiamGia getDiscountCode() {
 		return discountCode;
 	}
 
-	public void setDiscountCode(String discountCode) {
+	public void setDiscountCode(MaGiamGia discountCode) {
 		this.discountCode = discountCode;
 	}
 	

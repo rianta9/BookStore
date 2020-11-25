@@ -1,44 +1,41 @@
 package bean;
 
 public class Sach {
-	private String masach;
-	private String tensach;
-	private String tacgia;
+	private String maSach;
+	private String tenSach;
+	private TacGia tacGia;
 	private long gia;
 	private String anh;
-	private String maloai;
+	private LoaiSach loaiSach;
 
 	public String getMasach() {
-		return masach;
+		return maSach;
 	}
 	public Sach() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Sach(String masach, String tensach, String tacgia, long gia, String anh, String maloai) {
+	public Sach(String masach, String tensach, TacGia tacGia, long gia, String anh, LoaiSach loaiSach) {
 		super();
-		this.masach = masach;
-		this.tensach = tensach;
-		this.tacgia = tacgia;
+		this.maSach = masach;
+		this.tenSach = tensach;
+		this.tacGia = tacGia;
 		this.gia = gia;
 		this.anh = anh;
-		this.maloai = maloai;
+		this.loaiSach = loaiSach;
 	}
+	
+	
 	public void setMasach(String masach) {
-		this.masach = masach;
+		this.maSach = masach;
 	}
 	public String getTensach() {
-		return tensach;
+		return tenSach;
 	}
 	public void setTensach(String tensach) {
-		this.tensach = tensach;
+		this.tenSach = tensach;
 	}
-	public String getTacgia() {
-		return tacgia;
-	}
-	public void setTacgia(String tacgia) {
-		this.tacgia = tacgia;
-	}
+	
 	public long getGia() {
 		return gia;
 	}
@@ -51,11 +48,17 @@ public class Sach {
 	public void setAnh(String anh) {
 		this.anh = anh;
 	}
-	public String getMaloai() {
-		return maloai;
+	
+	public TacGia getTacGia() {
+		return tacGia;
 	}
-	public void setMaloai(String maloai) {
-		this.maloai = maloai;
+	public void setTacGia(TacGia tacGia) {
+		this.tacGia = tacGia;
 	}
-
+	public LoaiSach getLoaiSach() {
+		return loaiSach;
+	}
+	public void setLoaiSach(LoaiSach loaiSach) {
+		this.loaiSach = loaiSach;
+	}
 }

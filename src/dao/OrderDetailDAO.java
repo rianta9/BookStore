@@ -32,12 +32,12 @@ public class OrderDetailDAO {
 			c = thietLap.cn.prepareStatement(sql);
 			c.setString(1, orderID);
 			ResultSet rs = c.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				String orderDetailID = rs.getString("OrderDetailID").trim();
 				Date ngayNhan = rs.getDate("NgayNhan");
 				String maHang = rs.getString("MaSach").trim();
 				int soLuong = rs.getInt("SoLuong");
-				double donGia = Tool.toDouble(rs.getBigDecimal("donGia"));
+				double donGia = Tool.toDouble(rs.getBigDecimal("SalePrice"));
 				result.add(new OrderDetail(orderDetailID, orderID, ngayNhan, new MonHang(maHang, soLuong, donGia)));
 			}
 		} catch (Exception e) {
@@ -65,6 +65,8 @@ public class OrderDetailDAO {
 		} 
 		return result;
 	}
+	
+	
 //	
 //	/**
 //	 * Tìm kiếm liên kết giữa table order với một hoặc nhiều table khác. Nếu có return true.
