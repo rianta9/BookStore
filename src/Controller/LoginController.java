@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import bean.User;
 import bo.UserBO;
 
@@ -32,7 +33,7 @@ public class LoginController extends HttpServlet{
 		HttpSession session = req.getSession();
 		// Nếu user đã đăng nhập thì không cho phép đăng ký nữa
 		if(session.getAttribute("user") != null) {
-			resp.sendRedirect("SachController");
+			resp.sendRedirect(req.getContextPath()+ "/waiting");
 			return;
 		}
 		
@@ -44,18 +45,30 @@ public class LoginController extends HttpServlet{
 
 			String indentity = req.getParameter("indentity");
 			String password = req.getParameter("password");
+			
+			boolean isRememberMe = false;
+			String remember = req.getParameter("remember");
+			
 			if(indentity != null && password != null) {
 				UserBO bo = new UserBO();
 				int checkResult = bo.checkLogin(indentity, password);
 				if(checkResult == 1) {
 					User u = bo.getLogin(indentity, password);
 					session.setAttribute("user", u);
-
+					System.out.println("UserID: " + u.getUserID() + ", MaPhanQuyen: "+ u.getMaPhanQuyen());
 					// xoá after, errors
 					session.removeAttribute("after");
 					session.removeAttribute("errors");
 					
-					resp.sendRedirect("SachController");
+					if("on".equals(remember)){
+						isRememberMe = true;
+					}
+					
+					if(isRememberMe){
+						saveRemeberMe(resp, u.getName());
+					}
+					
+					resp.sendRedirect(req.getContextPath()+ "/waiting");
 					return;
 				}
 				else {
@@ -74,5 +87,11 @@ public class LoginController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
+	}
+	
+	private void saveRemeberMe(HttpServletResponse response, String username){
+		Cookie cookie = new Cookie("username", username);
+		cookie.setMaxAge(30*60);
+		response.addCookie(cookie);
 	}
 }

@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
 	<div class="loginform">
 		<div class="modal">
 			<div class="modal-content">
+			<div class = "back_form"><a href="SachController">back</a></div>
 				<p class="welcome">Welcome</p>
 				<form action="LoginController" method="post">
 				

@@ -43,4 +43,12 @@ public class SachBO {
 	public Sach find(String maSach) {
 		return dao.find(maSach);
 	}
+	
+	public boolean xoa(int id) {
+		return dao.xoa(id);
+	}
+	
+	public boolean update(Sach sach) {
+		return dao.update(sach);
+	}
 }

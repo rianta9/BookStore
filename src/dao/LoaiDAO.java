@@ -25,8 +25,10 @@ public class LoaiDAO {
 			ResultSet data = database.getTable("LoaiSach");
 			if(data == null) System.out.println("Data null");
 			while(data.next()) {
-				String maLoai = data.getString("MaLoaiSach").trim();
-				String tenLoai = data.getNString("TenLoaiSach").trim();
+				String maLoai = data.getString("MaLoaiSach");
+				if(maLoai != null) maLoai = maLoai.trim();
+				String tenLoai = data.getNString("TenLoaiSach");
+				if(tenLoai != null) tenLoai = tenLoai.trim();
 				list.add(new LoaiSach(maLoai, tenLoai));
 			}
 			data.close();

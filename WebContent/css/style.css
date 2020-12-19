@@ -1,10 +1,11 @@
 * {
-	font-family: Poppins-Regular,sans-serif;
+	font-family: Poppins-Regular, sans-serif;
 	margin: 0;
 	padding: 0;
 }
 
 body {
+	height: 100vh;
 	line-height: 1.4;
 	font-size: 14px;
 	color: #292929;
@@ -31,10 +32,10 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 #view {
-	min-height: 768px;
+	/*min-height: 768px;*/
+	position: relative;
+	top: 80px;
 }
-
-
 
 ul, li {
 	list-style-type: none;
@@ -187,7 +188,6 @@ ul.dropdown-menu>li>a {
 }
 
 .search-form1  .search-input {
-	min-width: 280px;
 	max-width: 76%;
 	height: 30px;
 	border-radius: 5px;
@@ -195,7 +195,6 @@ ul.dropdown-menu>li>a {
 }
 
 .search-form1  .search-button {
-	width: 20%;
 	height: 30px;
 	text-align: center;
 	margin-left: 10px;
@@ -298,6 +297,9 @@ ul.dropdown-menu>li>a {
 }
 
 #footer {
+	position: relative;
+	bottom: 0;
+	margin-top: 80px;
 	background-color: #292929;
 	color: #fff;
 }
@@ -341,8 +343,41 @@ ul.dropdown-menu>li>a {
 	text-transform: capitalize;
 }
 
-@media only screen and (max-width: 992px) {
+
+@media only screen and (max-width: 1199px) {
 	ul.navbar-right {
 		float: left;
+	}
+	#view{
+		top: 140px;
+	}
+	#footer{
+		position: relative;
+		margin-top: 110px;
+	}
+	
+	.search-form1  .search-input {
+		width: 500px;
+	}
+}
+
+
+@media only screen and (max-width: 767px) {
+	ul.navbar-right {
+		float: left;
+	}
+	
+	#view{
+		top: 80px;
+	}
+	
+	.search-form1  .search-input {
+		width: 767px;
+		max-width: 100%;
+	}
+	
+	#footer{
+		position: relative;
+		margin-top: 80px;
 	}
 }

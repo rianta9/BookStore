@@ -25,24 +25,28 @@ public class UserDAO {
 	 */
 	public User timKiem(long id){
 		User result = null;
-		String sql = "select * from User where userID = ?";
+		String sql = "select * from [User] where UserID = ?";
 		PreparedStatement c;
 		try {
-			c = thietLap.cn.prepareStatement(sql);
+			c = ThietLap.cn.prepareStatement(sql);
 			c.setLong(1, id);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
-				long userID = rs.getLong("userID");
-				String password = rs.getString("password").trim();
-				String fullName = rs.getNString("FullName").trim();
-				Date birthdate = rs.getDate("Birthday");
+				// String password = rs.getString("password").trim();
+				String fullName = rs.getNString("FullName");
+				if(fullName != null) fullName = fullName.trim();
+				Date birthdate = rs.getDate("Birthdate");
 				Date dateCreated = rs.getDate("DateCreated");
-				String maPhanQuyen = rs.getString("MaPhanQuyen").trim();
-				String phone = rs.getString("Phone").trim();
-				String email = rs.getString("Email").trim();
-				String address = rs.getNString("Address").trim();
+				String maPhanQuyen = rs.getString("MaPhanQuyen");
+				if(maPhanQuyen != null) maPhanQuyen = maPhanQuyen.trim();
+				String phone = rs.getString("Phone");
+				if(phone != null) phone = phone.trim();
+				String email = rs.getString("Email");
+				if(email != null) email = email.trim();
+				String address = rs.getNString("Address");
+				if(address != null) address = address.trim();
 				int status = rs.getInt("Status");
-				result = new User(userID, password, fullName, birthdate, dateCreated, maPhanQuyen, phone, email, address, status);
+				result = new User(id, null, fullName, birthdate, dateCreated, maPhanQuyen, phone, email, address, status);
 			}
 		} catch (Exception e) {
 			System.out.println("Loi tim ma!");
@@ -64,7 +68,7 @@ public class UserDAO {
 		else sql = "Select * from [User] where Phone = ?";
 		PreparedStatement c;
 		try {
-			c = thietLap.cn.prepareStatement(sql);
+			c = ThietLap.cn.prepareStatement(sql);
 			c.setString(1, indentity);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
@@ -92,18 +96,17 @@ public class UserDAO {
 		else sql = "Select * from [User] where Phone = ? and Password = ?";
 		PreparedStatement c;
 		try {
-			c = thietLap.cn.prepareStatement(sql);
+			c = ThietLap.cn.prepareStatement(sql);
 			c.setString(1, indentity);
 			c.setString(2, password);
 			ResultSet rs = c.executeQuery();
 			if(rs.next()) {
 				long userID = rs.getLong("UserID");
-				String fullName = rs.getNString("fullName");
-				result = new User(userID, fullName);
+				result = timKiem(userID);
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Loi tim ma!");
+			System.out.println("UserDao getLogin:");
 			e.printStackTrace();
 		}
 		return result;

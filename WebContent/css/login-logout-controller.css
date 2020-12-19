@@ -154,3 +154,10 @@ label {
 	color: red;
 	margin-bottom: 20px;
 }
+
+.back_form{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: black;
+}
