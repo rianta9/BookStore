@@ -11,8 +11,10 @@
 </head>
 <body>
 	<div class="signupform">
+		
 		<div class="modal-signup">
 			<div class="modal-content">
+			<div class = "back_form"><a href="SachController">back</a></div>
 				<p class="welcome">Sign Up</p>
 				<form action="AddUserController" method="post">
 					
@@ -45,7 +47,7 @@
 					<span class="error" name="error-confirm-password">${errors.illegal_confirm_password}</span>
 					<br>
 					
-					<input type="checkbox" name="checkbox">
+					<input type="checkbox" name="checkbox" checked="true">
 					<span class="checkbox">I accept the <a href="#">Terms of Use</a> and <a href="#">Private Policy</a>.</span>
 					
 					<br>
@@ -54,7 +56,7 @@
 					<br> 
 					<span class="error" name="error-confirm-password">${errors.signup_fail}</span>
 				</form>
-				<p class="text-center"> <span class="txt1">Already Have an account?</span> <span class="txt2"><a href="LoginController">Log In</a></span></p>
+				<p class="text-center"> <span class="txt1">Already have an account?</span> <span class="txt2"><a href="LoginController">Log In</a></span></p>
 			</div>
 		</div>
 	</div>

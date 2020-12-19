@@ -5,6 +5,7 @@
 }
 
 body {
+	height: 100vh;
 	line-height: 1.4;
 	font-size: 14px;
 	color: #292929;
@@ -31,7 +32,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 #view {
-	min-height: 768px;
+	/*min-height: 768px;*/
 	position: relative;
 	top: 80px;
 }
@@ -350,24 +351,33 @@ ul.dropdown-menu>li>a {
 	#view{
 		top: 140px;
 	}
-}
-
-
-@media only screen and (max-width: 991px) {
-	ul.navbar-right {
-		float: left;
+	#footer{
+		position: relative;
+		margin-top: 110px;
 	}
-	#view{
-		top: 190px;
+	
+	.search-form1  .search-input {
+		width: 500px;
 	}
 }
 
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 767px) {
 	ul.navbar-right {
 		float: left;
 	}
 	
 	#view{
 		top: 80px;
+	}
+	
+	.search-form1  .search-input {
+		width: 767px;
+		max-width: 100%;
+	}
+	
+	#footer{
+		position: relative;
+		margin-top: 80px;
 	}
 }

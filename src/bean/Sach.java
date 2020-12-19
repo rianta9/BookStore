@@ -7,6 +7,7 @@ public class Sach {
 	private long gia;
 	private String anh;
 	private LoaiSach loaiSach;
+	private String info;
 
 	public String getMasach() {
 		return maSach;
@@ -15,7 +16,7 @@ public class Sach {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Sach(String masach, String tensach, TacGia tacGia, long gia, String anh, LoaiSach loaiSach) {
+	public Sach(String masach, String tensach, TacGia tacGia, long gia, String anh, LoaiSach loaiSach, String info) {
 		super();
 		this.maSach = masach;
 		this.tenSach = tensach;
@@ -23,6 +24,7 @@ public class Sach {
 		this.gia = gia;
 		this.anh = anh;
 		this.loaiSach = loaiSach;
+		this.info = info;
 	}
 	
 	
@@ -61,4 +63,12 @@ public class Sach {
 	public void setLoaiSach(LoaiSach loaiSach) {
 		this.loaiSach = loaiSach;
 	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	
 }

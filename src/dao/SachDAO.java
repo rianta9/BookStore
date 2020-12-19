@@ -26,11 +26,62 @@ public class SachDAO {
 		return (long)n;
 	}
 	
+	
+	private boolean daLienKet(int ID) {
+		// Tìm kiếm liên kết với table OrderDetail
+		String sql = "select * from [OrderDetails] where MaSach = ?";
+		PreparedStatement c;
+		try {
+			c = thietLap.cn.prepareStatement(sql);
+			c.setInt(1, ID);
+			ResultSet rs = c.executeQuery();
+			return rs.next();
+		} catch (Exception e) {
+			System.out.println("Loi tim ma!");
+			e.printStackTrace();
+			return true; // return true để ko cho xoá
+		}
+		// Tìm kiếm liên kết với table ...
+	}
+	
+	public boolean xoa(int Id) {
+		String sql = "delete from [Sach] where MaSach = ?";
+		boolean result = false;
+		if(!daLienKet(Id)) { // Nếu sách chưa liên kết với các bảng dữ liệu khác
+			try {
+				PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+				c.setInt(1, Id);
+				if(c.executeUpdate() == 1) result = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean update(Sach sach) {
+		String sql = "Update [Sach] set TenSach = ?, GiaBan = ?, MaTacGia = ?, MaLoai = ?, BiaSach = ?, GioiThieu = ?";
+		boolean result = false;
+		try {
+			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			c.setNString(1, sach.getTensach());
+			c.setBigDecimal(2, BigDecimal.valueOf(sach.getGia()));
+			c.setString(3, sach.getTacGia().getMaTacGia());
+			c.setString(4, sach.getLoaiSach().getMaLoai());
+			c.setNString(5, sach.getAnh());
+			c.setNString(6, sach.getInfo());
+			if(c.executeUpdate() == 1) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public ArrayList<Sach> docDatabase() {
 		list = new ArrayList<Sach>();
 		try {
-			String sql = "select * from [Sach] as s left join [TacGia] as t on s.MaTacGia = t.maTacGia";
-			PreparedStatement c = thietLap.cn.prepareStatement(sql);
+			String sql = "select * from [Sach] as s left join [TacGia] as t on s.MaTacGia = t.maTacGia left join [LoaiSach] as l on s.MaLoaiSach = l.MaLoaiSach";
+			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
 			ResultSet data = c.executeQuery();
 			
 			if(data == null) System.out.println("Data null");
@@ -42,10 +93,12 @@ public class SachDAO {
 				//TODO: Dùng TacGiaDao để lấy thông tin
 				String tenTacGia = data.getString("TenTacGia");
 				String info = data.getString("Info");
-				String hinhAnh = data.getString("hinhAnh");
+				String hinhAnh = data.getString("HinhAnh");
 				String anh = data.getString("BiaSach");
 				String maloai = data.getString("MaLoaiSach").trim();
-				list.add(new Sach(masach, tensach, new TacGia(maTacGia, tenTacGia, info, hinhAnh), gia, anh, new LoaiSach(maloai)));
+				String tenloai = data.getNString("TenLoaiSach").trim();
+				String gioiThieuSach = data.getNString("GioiThieu");
+				list.add(new Sach(masach, tensach, new TacGia(maTacGia, tenTacGia, info, hinhAnh), gia, anh, new LoaiSach(maloai, tenloai), gioiThieuSach));
 			}
 			data.close();
 		} catch (Exception e){
@@ -151,4 +204,7 @@ public class SachDAO {
 		if(size%sizeOfPage > 0) result++;
 		return result;
 	}
+	
+	
+	
 }
