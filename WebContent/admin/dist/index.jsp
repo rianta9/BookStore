@@ -25,7 +25,7 @@
         
         	<!-- SIDE BAR -->
         	
-            <jsp:include page="/admin/dist/slide-bar.jsp"></jsp:include>
+            <jsp:include page="/admin/dist/sidebar.jsp"></jsp:include>
             
             <!-- END SIDE BAR -->
             

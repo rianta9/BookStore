@@ -44,6 +44,10 @@ public class SachBO {
 		return dao.find(maSach);
 	}
 	
+	public boolean them(Sach sach) {
+		return dao.them(sach);
+	}
+	
 	public boolean xoa(int id) {
 		return dao.xoa(id);
 	}

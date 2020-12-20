@@ -15,6 +15,12 @@ public class TacGia {
 		this.info = info;
 		this.hinhAnh = hinhAnh;
 	}
+	public TacGia(String maTacGia) {
+		this.maTacGia = maTacGia;
+		this.tenTacGia = null;
+		this.info = null;
+		this.hinhAnh = null;
+	}
 	public String getMaTacGia() {
 		return maTacGia;
 	}
