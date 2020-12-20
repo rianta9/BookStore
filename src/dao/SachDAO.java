@@ -59,8 +59,27 @@ public class SachDAO {
 		return result;
 	}
 	
+	public boolean them(Sach sach) {
+		String sql = "Insert into [Sach](TenSach, GiaBan, MaTacGia, MaLoaiSach, BiaSach, GioiThieu) values (?, ?, ?, ?, ?, ?)";
+		boolean result = false;
+		try {
+			PreparedStatement c = ThietLap.cn.prepareStatement(sql);
+			c.setNString(1, sach.getTensach());
+			c.setBigDecimal(2, BigDecimal.valueOf(sach.getGia()));
+			c.setString(3, sach.getTacGia().getMaTacGia());
+			c.setString(4, sach.getLoaiSach().getMaLoai());
+			c.setNString(5, sach.getAnh());
+			c.setNString(6, sach.getInfo());
+			if(c.executeUpdate() == 1) result = true;
+		} catch (Exception e) {
+			System.out.println("SachDAO Them:");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public boolean update(Sach sach) {
-		String sql = "Update [Sach] set TenSach = ?, GiaBan = ?, MaTacGia = ?, MaLoai = ?, BiaSach = ?, GioiThieu = ?";
+		String sql = "Update [Sach] set TenSach = ?, GiaBan = ?, MaTacGia = ?, MaLoaiSach = ?, BiaSach = ?, GioiThieu = ?";
 		boolean result = false;
 		try {
 			PreparedStatement c = ThietLap.cn.prepareStatement(sql);

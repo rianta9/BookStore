@@ -27,6 +27,25 @@ public class Sach {
 		this.info = info;
 	}
 	
+	/**
+	 * Sử dụng để add dữ liệu vào database
+	 * @param tensach
+	 * @param tacGia
+	 * @param gia
+	 * @param anh
+	 * @param loaiSach
+	 * @param info
+	 */
+	public Sach(String tensach, TacGia tacGia, long gia, String anh, LoaiSach loaiSach, String info) {
+		super();
+		this.maSach = null;
+		this.tenSach = tensach;
+		this.tacGia = tacGia;
+		this.gia = gia;
+		this.anh = anh;
+		this.loaiSach = loaiSach;
+		this.info = info;
+	}
 	
 	public void setMasach(String masach) {
 		this.maSach = masach;
